@@ -1,0 +1,129 @@
+@media (max-width: 1024px) {
+    .story-grid,
+    .future-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .story-visual {
+        height: 350px;
+        order: -1;
+    }
+
+    .upcoming-card {
+        grid-template-columns: 1fr;
+    }
+
+    .upcoming-card-image {
+        min-height: 200px;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 4rem 1.25rem;
+    }
+
+    .header-inner {
+        padding: 0 1.25rem;
+    }
+
+    .main-nav {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .mobile-menu {
+        display: flex;
+    }
+
+    .hero {
+        padding: calc(var(--header-height) + 2rem) 1.25rem 4rem;
+    }
+
+    .hero-title {
+        font-size: 2.8rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+
+    .brand-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .values-list {
+        grid-template-columns: 1fr;
+    }
+
+    .future-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .stat-card {
+        padding: 1.5rem;
+    }
+
+    .stat-number {
+        font-size: 1.8rem;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .future-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-title {
+        font-size: 2.3rem;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .property-card-body {
+        padding: 1.4rem 1.5rem 1.5rem;
+    }
+
+    .upcoming-card-body {
+        padding: 1.8rem 1.5rem;
+    }
+
+    .upcoming-card-body h3 {
+        font-size: 1.5rem;
+    }
+}
