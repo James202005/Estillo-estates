@@ -31,6 +31,17 @@
     /* Structural tokens */
     --max-width: 1240px;
     --header-height: 80px;
+    --header-height-scrolled: 72px;
+
+    /* Touch & device tokens */
+    --tap-target: 44px;
+    --gutter: 2rem;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --mobile-bar-height: 4.6rem;
+
     --border-radius-sm: 4px;
     --border-radius-md: 8px;
     --border-radius-lg: 16px;
@@ -49,4 +60,23 @@
     --glass-bg: rgba(250, 247, 242, 0.85);
     --glass-border: rgba(229, 221, 210, 0.6);
     --glass-blur: blur(20px);
+}
+
+/* Compact structural tokens for tablets & phones.
+   Overriding these keeps header height, scroll offsets and
+   section gutters in sync everywhere they are referenced. */
+@media (max-width: 900px) {
+    :root {
+        --header-height: 68px;
+        --header-height-scrolled: 60px;
+        --gutter: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --header-height: 62px;
+        --header-height-scrolled: 56px;
+        --gutter: 1.15rem;
+    }
 }

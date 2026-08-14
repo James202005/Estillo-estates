@@ -6,8 +6,11 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: var(--header-height);
+    scroll-padding-top: calc(var(--header-height) + 12px);
     font-size: 16px;
+    /* Stop iOS/Android from inflating type in landscape */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {
@@ -18,6 +21,19 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    /* Never let a long word or URL force sideways scrolling on a phone */
+    overflow-wrap: break-word;
+}
+
+/* iOS-safe scroll lock. JS stores the offset in --scroll-lock-top so the
+   page does not jump to the top while a drawer or modal is open. */
+body.is-locked {
+    position: fixed;
+    top: var(--scroll-lock-top, 0);
+    left: 0;
+    right: 0;
+    width: 100%;
+    overflow: hidden;
 }
 
 img {
@@ -39,15 +55,72 @@ select {
     color: inherit;
 }
 
+a,
+button,
+input,
+select,
+textarea,
+[role="button"] {
+    -webkit-tap-highlight-color: rgba(184, 151, 90, 0.16);
+}
+
+button,
+[role="button"],
+.btn {
+    /* Removes the 300ms tap delay and stops double-tap zoom on controls */
+    touch-action: manipulation;
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: var(--border-radius-sm);
+}
+
+.skip-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-120%);
+    z-index: 3000;
+    background: var(--color-charcoal);
+    color: var(--color-cream);
+    padding: 0.8rem 1.2rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: transform var(--transition-fast);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
 /* Common Section Wrapper */
 .section {
-    padding: 7rem 2rem;
+    /* Fluid padding: 3.25rem on small phones up to 7rem on desktop */
+    padding: clamp(3.25rem, 9vw, 7rem) var(--gutter);
+    padding-left: max(var(--gutter), var(--safe-left));
+    padding-right: max(var(--gutter), var(--safe-right));
     position: relative;
 }
 
 .section-inner {
     max-width: var(--max-width);
     margin: 0 auto;
+}
+
+/* Centered intro block used by Portfolio & Brand Promise */
+.section-head {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.section-head .section-description {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Typography Utilities */
@@ -64,7 +137,7 @@ select {
 
 .section-title {
     font-family: var(--font-serif);
-    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    font-size: clamp(1.95rem, 6vw, 3.4rem);
     font-weight: 600;
     line-height: 1.15;
     color: var(--color-charcoal);
@@ -74,7 +147,7 @@ select {
 
 .section-description {
     font-family: var(--font-sans);
-    font-size: 1.05rem;
+    font-size: clamp(0.98rem, 2.4vw, 1.05rem);
     color: var(--color-gray);
     line-height: 1.8;
     max-width: 680px;
@@ -86,20 +159,43 @@ select {
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
 }
 
 .js-enabled .reveal {
     opacity: 0;
     transform: translateY(35px);
+    /* Scoped to elements still waiting so phones aren't holding
+       a compositor layer for every card on the page */
+    will-change: opacity, transform;
 }
 
 .js-enabled .reveal.visible {
     opacity: 1;
     transform: translateY(0);
+    will-change: auto;
 }
 
 .reveal-delay-1 { transition-delay: 0.12s; }
 .reveal-delay-2 { transition-delay: 0.24s; }
 .reveal-delay-3 { transition-delay: 0.36s; }
 .reveal-delay-4 { transition-delay: 0.48s; }
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .js-enabled .reveal {
+        opacity: 1;
+        transform: none;
+    }
+}

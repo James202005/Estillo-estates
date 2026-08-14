@@ -1,14 +1,19 @@
 /* Hero Section */
 .hero {
     min-height: 100vh;
+    /* svh = the small viewport height, so the hero never hides behind
+       the mobile browser's collapsing address bar */
+    min-height: 100svh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     background: linear-gradient(180deg, rgba(20, 18, 16, 0.45) 0%, rgba(20, 18, 16, 0.75) 100%),
                 url('../assets/hero_bg.png') center/cover no-repeat;
+    /* scroll (not fixed) avoids repaint jank while scrolling on mobile */
+    background-attachment: scroll;
     overflow: hidden;
-    padding: var(--header-height) 2rem 4rem;
+    padding: calc(var(--header-height) + var(--safe-top) + 1.5rem) max(var(--gutter), var(--safe-right)) 4rem max(var(--gutter), var(--safe-left));
     color: var(--color-white);
 }
 
@@ -37,7 +42,7 @@
 
 .hero-title {
     font-family: var(--font-serif);
-    font-size: clamp(3.2rem, 7.5vw, 5.8rem);
+    font-size: clamp(2.4rem, 9vw, 5.8rem);
     font-weight: 600;
     line-height: 1.05;
     color: var(--color-white);
@@ -83,11 +88,6 @@
     color: var(--color-charcoal);
 }
 
-.hero-actions .btn-primary:hover {
-    background: var(--color-gold-light);
-    transform: translateY(-3px);
-}
-
 .hero-actions .btn-secondary {
     color: var(--color-white);
     border-color: rgba(255, 255, 255, 0.6);
@@ -95,9 +95,16 @@
     backdrop-filter: blur(8px);
 }
 
-.hero-actions .btn-secondary:hover {
-    background: var(--color-white);
-    color: var(--color-charcoal);
+@media (hover: hover) and (pointer: fine) {
+    .hero-actions .btn-primary:hover {
+        background: var(--color-gold-light);
+        transform: translateY(-3px);
+    }
+
+    .hero-actions .btn-secondary:hover {
+        background: var(--color-white);
+        color: var(--color-charcoal);
+    }
 }
 
 .hero-scroll-indicator {
@@ -213,7 +220,8 @@
 
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    /* min() stops the 340px track from overflowing narrow phone viewports */
+    grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
     gap: 2.2rem;
 }
 
@@ -231,14 +239,29 @@
     cursor: pointer;
 }
 
-.property-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-md);
+@media (hover: hover) and (pointer: fine) {
+    .property-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--color-gold-light);
+    }
+
+    .property-card:hover .property-card-image img {
+        transform: scale(1.06);
+    }
+}
+
+/* Touch feedback stands in for hover on phones */
+.property-card:active {
+    transform: scale(0.99);
     border-color: var(--color-gold-light);
 }
 
 .property-card-image {
-    height: 250px;
+    /* aspect-ratio reserves the space before the image decodes,
+       so cards don't shift around as you scroll on mobile */
+    aspect-ratio: 4 / 3;
+    max-height: 250px;
     position: relative;
     overflow: hidden;
     background: var(--color-charcoal);
@@ -249,10 +272,6 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.property-card:hover .property-card-image img {
-    transform: scale(1.06);
 }
 
 .property-card-body {
@@ -306,9 +325,9 @@
 
 .brand-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2rem;
-    margin-top: 4rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    gap: clamp(1rem, 3vw, 2rem);
+    margin-top: clamp(2.25rem, 6vw, 4rem);
 }
 
 .brand-item {
@@ -320,10 +339,24 @@
     transition: var(--transition-base);
 }
 
-.brand-item:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--color-gold-light);
+@media (hover: hover) and (pointer: fine) {
+    .brand-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--color-gold-light);
+    }
+
+    .brand-item:hover .brand-icon {
+        background: var(--color-gold);
+        color: var(--color-white);
+        transform: scale(1.08);
+        box-shadow: var(--shadow-gold);
+    }
+
+    .value-item:hover {
+        background: rgba(255, 255, 255, 0.06);
+        transform: translateX(5px);
+    }
 }
 
 .brand-icon {
@@ -341,13 +374,6 @@
     font-family: var(--font-serif);
     transition: var(--transition-base);
     box-shadow: 0 0 0 6px rgba(184, 151, 90, 0.08);
-}
-
-.brand-item:hover .brand-icon {
-    background: var(--color-gold);
-    color: var(--color-white);
-    transform: scale(1.08);
-    box-shadow: var(--shadow-gold);
 }
 
 .brand-item h4 {
@@ -381,9 +407,9 @@
 
 .values-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2.5rem;
-    margin-top: 3.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: clamp(1rem, 3vw, 2.5rem);
+    margin-top: clamp(2.25rem, 6vw, 3.5rem);
 }
 
 .value-item {
@@ -392,11 +418,6 @@
     background: rgba(255, 255, 255, 0.03);
     border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
     transition: var(--transition-base);
-}
-
-.value-item:hover {
-    background: rgba(255, 255, 255, 0.06);
-    transform: translateX(5px);
 }
 
 .value-item h4 {

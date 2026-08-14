@@ -2,10 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Estillo Estates — Designed Spaces. Meaningful Stays.</title>
     <meta name="description" content="Estillo Estates is a premier hospitality and property development brand crafting intentional spaces, luxury stays, and lasting legacy destinations.">
-    
+    <meta name="theme-color" content="#faf7f2">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
     <!-- OpenGraph SEO Tags -->
     <meta property="og:title" content="Estillo Estates — Designed Spaces. Meaningful Stays.">
     <meta property="og:description" content="A growing hospitality and property development brand built around thoughtful design, quality craftsmanship, and genuine hospitality.">
@@ -21,11 +25,13 @@
 </head>
 <body>
 
+    <a href="#hero" class="skip-link">Skip to content</a>
+
     <!-- Header Navigation Bar -->
     <header class="site-header" id="siteHeader">
         <div class="header-inner">
             <a href="#" class="logo" id="logoLink">ESTILLO<span>.</span>ESTATES</a>
-            <nav class="main-nav" id="mainNav">
+            <nav class="main-nav" id="mainNav" aria-label="Primary">
                 <a href="#story">Our Story</a>
                 <a href="#portfolio">Portfolio</a>
                 <a href="#brand">Brand Promise</a>
@@ -33,22 +39,29 @@
                 <a href="#future">Future</a>
                 <a href="#contact" class="nav-cta open-booking-modal">Get In Touch</a>
             </nav>
-            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="hamburger" id="hamburger" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+                <span class="hamburger-bars" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
             </button>
         </div>
     </header>
 
     <!-- Mobile Drawer Menu -->
     <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-        <a href="#story">Our Story</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#brand">Brand Promise</a>
-        <a href="#values">Values</a>
-        <a href="#future">Future</a>
-        <a href="#contact" class="open-booking-modal">Get In Touch</a>
+        <nav class="mobile-menu-nav" aria-label="Mobile">
+            <a href="#story"><span>Our Story</span><span class="mobile-menu-arrow" aria-hidden="true">→</span></a>
+            <a href="#portfolio"><span>Portfolio</span><span class="mobile-menu-arrow" aria-hidden="true">→</span></a>
+            <a href="#brand"><span>Brand Promise</span><span class="mobile-menu-arrow" aria-hidden="true">→</span></a>
+            <a href="#values"><span>Values</span><span class="mobile-menu-arrow" aria-hidden="true">→</span></a>
+            <a href="#future"><span>Future</span><span class="mobile-menu-arrow" aria-hidden="true">→</span></a>
+        </nav>
+        <div class="mobile-menu-footer">
+            <a href="#contact" class="btn btn-primary btn-block open-booking-modal">Get In Touch</a>
+            <a href="mailto:hello@estilloestates.com" class="mobile-menu-mail">hello@estilloestates.com</a>
+        </div>
     </div>
 
     <!-- Hero Section -->
@@ -69,7 +82,7 @@
                 <a href="#story" class="btn btn-secondary">Our Story</a>
             </div>
         </div>
-        <div class="hero-scroll-indicator">
+        <div class="hero-scroll-indicator" aria-hidden="true">
             <span>Scroll</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 5v14M6 13l6 6 6-6"/>
@@ -120,28 +133,29 @@
     <!-- Portfolio Section -->
     <section class="section portfolio-section" id="portfolio">
         <div class="section-inner">
-            <div class="portfolio-header reveal" style="text-align: center; max-width: 700px; margin: 0 auto;">
+            <div class="section-head reveal">
                 <span class="section-label">Hospitality Portfolio</span>
                 <h2 class="section-title">Our Growing Collection</h2>
-                <p class="section-description" style="margin: 0 auto;">
+                <p class="section-description">
                     Estillo Estates serves as the parent brand for a growing collection of
                     thoughtfully designed hospitality concepts and real estate developments.
                 </p>
             </div>
 
             <!-- Category Filter Tabs -->
-            <div class="portfolio-filters reveal reveal-delay-1">
-                <button class="filter-btn active" data-filter="all">All Projects</button>
-                <button class="filter-btn" data-filter="live">Live Stays</button>
-                <button class="filter-btn" data-filter="upcoming">Upcoming Projects</button>
+            <div class="portfolio-filters reveal reveal-delay-1" role="group" aria-label="Filter properties">
+                <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">All Projects</button>
+                <button class="filter-btn" type="button" data-filter="live" aria-pressed="false">Live Stays</button>
+                <button class="filter-btn" type="button" data-filter="upcoming" aria-pressed="false">Upcoming</button>
             </div>
 
             <div class="portfolio-grid">
                 <!-- Property Card 1 -->
-                <div class="property-card reveal reveal-delay-1" data-category="live" data-property-id="cozy-home">
+                <div class="property-card reveal reveal-delay-1" data-category="live" data-property-id="cozy-home"
+                     role="button" tabindex="0" aria-label="View details for Semi-Industrial Cozy Home">
                     <div class="property-card-image">
                         <span class="property-badge live">Live</span>
-                        <img src="assets/property_cozy.png" alt="Semi-Industrial Cozy Home interior showcase">
+                        <img src="assets/property_cozy.png" alt="Semi-Industrial Cozy Home interior showcase" loading="lazy" decoding="async">
                     </div>
                     <div class="property-card-body">
                         <span class="years">2025 — Present</span>
@@ -152,16 +166,17 @@
                         </p>
                         <div class="property-card-footer">
                             <span>Explore Details</span>
-                            <span>→</span>
+                            <span aria-hidden="true">→</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Property Card 2 -->
-                <div class="property-card reveal reveal-delay-2" data-category="live" data-property-id="soak-screen">
+                <div class="property-card reveal reveal-delay-2" data-category="live" data-property-id="soak-screen"
+                     role="button" tabindex="0" aria-label="View details for Soak Screen Urban Hideaway">
                     <div class="property-card-image">
                         <span class="property-badge live">Live</span>
-                        <img src="assets/property_cozy.png" alt="Soak Screen Urban Hideaway showcase">
+                        <img src="assets/property_cozy.png" alt="Soak Screen Urban Hideaway showcase" loading="lazy" decoding="async">
                     </div>
                     <div class="property-card-body">
                         <span class="years">2026 — Present</span>
@@ -172,16 +187,17 @@
                         </p>
                         <div class="property-card-footer">
                             <span>Explore Details</span>
-                            <span>→</span>
+                            <span aria-hidden="true">→</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Property Card 3 -->
-                <div class="property-card reveal reveal-delay-3" data-category="upcoming" data-property-id="industrial-suites">
+                <div class="property-card reveal reveal-delay-3" data-category="upcoming" data-property-id="industrial-suites"
+                     role="button" tabindex="0" aria-label="View details for Estillo Industrial Suites">
                     <div class="property-card-image">
                         <span class="property-badge upcoming">Target — 2028</span>
-                        <img src="assets/hero_bg.png" alt="Estillo Industrial Suites architecture facade rendering">
+                        <img src="assets/hero_bg.png" alt="Estillo Industrial Suites architecture facade rendering" loading="lazy" decoding="async">
                     </div>
                     <div class="property-card-body">
                         <span class="years">Target Launch — 2028</span>
@@ -192,7 +208,7 @@
                         </p>
                         <div class="property-card-footer">
                             <span>Explore Vision</span>
-                            <span>→</span>
+                            <span aria-hidden="true">→</span>
                         </div>
                     </div>
                 </div>
@@ -203,10 +219,10 @@
     <!-- Brand Promise Section -->
     <section class="section brand-section" id="brand">
         <div class="section-inner">
-            <div class="reveal" style="text-align: center; max-width: 680px; margin: 0 auto;">
+            <div class="section-head reveal">
                 <span class="section-label">Our Brand Promise</span>
                 <h2 class="section-title">What Every Stay Delivers</h2>
-                <p class="section-description" style="margin: 0 auto;">
+                <p class="section-description">
                     We aspire to build a brand that guests actively seek—not simply because of
                     the location, but because of the experience associated with the Estillo Estates name.
                 </p>
@@ -296,7 +312,7 @@
                     <p>
                         Designed spaces. Meaningful stays. A legacy built to last.
                     </p>
-                    <a href="#portfolio" class="btn btn-primary" style="margin-top: 1rem;">View Our Portfolio</a>
+                    <a href="#portfolio" class="btn btn-primary future-cta">View Our Portfolio</a>
                 </div>
                 <div class="future-stats reveal reveal-delay-1">
                     <div class="stat-card">
@@ -358,74 +374,82 @@
         </div>
     </footer>
 
+    <!-- Sticky Mobile Action Bar -->
+    <div class="mobile-cta-bar" id="mobileCtaBar">
+        <a href="#portfolio" class="mobile-cta-link">Portfolio</a>
+        <button type="button" class="btn btn-primary mobile-cta-btn open-booking-modal">Book a Stay</button>
+    </div>
+
     <!-- Property Quick-View Modal Overlay -->
-    <div class="modal-overlay" id="propertyModal" aria-hidden="true">
+    <div class="modal-overlay" id="propertyModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalPropTitle">
         <div class="modal-card">
-            <button class="modal-close" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+            <div class="modal-grabber" aria-hidden="true"></div>
+            <button class="modal-close" id="modalCloseBtn" type="button" aria-label="Close property details">&times;</button>
             <div class="modal-body">
-                <div style="display:flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; margin-bottom: 0.6rem;">
-                    <span class="section-label" style="margin-bottom:0;" id="modalPropCapacity">Capacity</span>
-                    <span id="modalPropLocation" style="font-size: 0.78rem; color: var(--color-gray); letter-spacing: 0.08em;">Location</span>
+                <div class="modal-meta">
+                    <span class="section-label" id="modalPropCapacity">Capacity</span>
+                    <span class="modal-location" id="modalPropLocation">Location</span>
                 </div>
-                <h2 id="modalPropTitle" style="font-family: var(--font-serif); font-size: 2.2rem; margin-bottom: 0.4rem;">Property Title</h2>
-                <p id="modalPropTagline" style="color: var(--color-gold); font-weight: 600; margin-bottom: 1.2rem;">Property Tagline</p>
-                
-                <div style="border-radius: var(--border-radius-md); overflow: hidden; margin-bottom: 1.5rem; max-height: 280px;">
-                    <img id="modalPropImage" src="" alt="Property detail view" style="width: 100%; height: 100%; object-fit: cover;">
+                <h2 class="modal-title" id="modalPropTitle">Property Title</h2>
+                <p class="modal-tagline" id="modalPropTagline">Property Tagline</p>
+
+                <div class="modal-figure">
+                    <img id="modalPropImage" src="" alt="Property detail view" loading="lazy" decoding="async">
                 </div>
 
-                <p id="modalPropDesc" style="color: var(--color-gray); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;">Property Description</p>
-                
-                <div style="background: var(--color-cream); padding: 1.2rem; border-radius: var(--border-radius-md); margin-bottom: 1.8rem;">
-                    <h5 style="font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-charcoal); margin-bottom: 0.8rem;">Key Amenities & Features</h5>
-                    <ul id="modalPropAmenities" style="list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.88rem; color: var(--color-gray);"></ul>
+                <p class="modal-desc" id="modalPropDesc">Property Description</p>
+
+                <div class="modal-amenities">
+                    <h5>Key Amenities &amp; Features</h5>
+                    <ul id="modalPropAmenities" class="amenity-list"></ul>
                 </div>
 
-                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
-                    <button class="btn btn-primary open-booking-modal" style="width: 100%;">Inquire / Reserve Stay</button>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-primary btn-block open-booking-modal">Inquire / Reserve Stay</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Interactive Booking / Inquiry Modal Overlay -->
-    <div class="modal-overlay" id="bookingModal" aria-hidden="true">
-        <div class="modal-card" style="max-width: 540px;">
-            <button class="modal-close" id="bookingCloseBtn" aria-label="Close modal">&times;</button>
+    <div class="modal-overlay" id="bookingModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+        <div class="modal-card modal-card-sm">
+            <div class="modal-grabber" aria-hidden="true"></div>
+            <button class="modal-close" id="bookingCloseBtn" type="button" aria-label="Close inquiry form">&times;</button>
             <div class="modal-body">
                 <span class="section-label">Connect With Us</span>
-                <h2 style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: 0.5rem;">Book a Stay or Inquire</h2>
-                <p style="color: var(--color-gray); font-size: 0.9rem; margin-bottom: 1.8rem;">Send your inquiry directly to our Estillo Estates hospitality concierge.</p>
-                
-                <form id="bookingForm">
-                    <div style="margin-bottom: 1.2rem;">
-                        <label style="display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; color: var(--color-charcoal);">Full Name</label>
-                        <input type="text" required placeholder="e.g. Alex Estilloro" style="width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--color-border); border-radius: var(--border-radius-sm); outline: none;">
+                <h2 class="modal-title" id="bookingModalTitle">Book a Stay or Inquire</h2>
+                <p class="modal-desc modal-desc-tight">Send your inquiry directly to our Estillo Estates hospitality concierge.</p>
+
+                <form id="bookingForm" novalidate>
+                    <div class="form-field">
+                        <label class="form-label" for="bookingName">Full Name</label>
+                        <input class="form-control" id="bookingName" name="name" type="text" required autocomplete="name" placeholder="e.g. Alex Estilloro">
                     </div>
-                    <div style="margin-bottom: 1.2rem;">
-                        <label style="display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; color: var(--color-charcoal);">Email Address</label>
-                        <input type="email" required placeholder="alex@example.com" style="width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--color-border); border-radius: var(--border-radius-sm); outline: none;">
+                    <div class="form-field">
+                        <label class="form-label" for="bookingEmail">Email Address</label>
+                        <input class="form-control" id="bookingEmail" name="email" type="email" required autocomplete="email" inputmode="email" placeholder="alex@example.com">
                     </div>
-                    <div style="margin-bottom: 1.2rem;">
-                        <label style="display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; color: var(--color-charcoal);">Property of Interest</label>
-                        <select style="width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--color-border); border-radius: var(--border-radius-sm); outline: none; background: var(--color-white);">
+                    <div class="form-field">
+                        <label class="form-label" for="bookingProperty">Property of Interest</label>
+                        <select class="form-control form-select" id="bookingProperty" name="property">
                             <option value="cozy-home">Semi-Industrial Cozy Home</option>
                             <option value="soak-screen">Soak | Screen Urban Hideaway</option>
                             <option value="industrial-suites">Estillo Industrial Suites (2028 Development)</option>
                             <option value="general">General Partnership / Inquiry</option>
                         </select>
                     </div>
-                    <div style="margin-bottom: 1.8rem;">
-                        <label style="display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; color: var(--color-charcoal);">Message / Requested Stay Dates</label>
-                        <textarea rows="3" required placeholder="Tell us about your trip or inquiry..." style="width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--color-border); border-radius: var(--border-radius-sm); outline: none; resize: vertical;"></textarea>
+                    <div class="form-field form-field-last">
+                        <label class="form-label" for="bookingMessage">Message / Requested Stay Dates</label>
+                        <textarea class="form-control" id="bookingMessage" name="message" rows="3" required placeholder="Tell us about your trip or inquiry..."></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Inquiry</button>
+                    <button type="submit" class="btn btn-primary btn-block">Submit Inquiry</button>
                 </form>
 
-                <div id="bookingFormSuccess" style="display: none; text-align: center; padding: 2rem 1rem;">
-                    <div style="font-size: 3rem; color: var(--color-gold); margin-bottom: 1rem;">✓</div>
-                    <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 0.6rem;">Inquiry Received!</h3>
-                    <p style="color: var(--color-gray); font-size: 0.95rem;">Thank you for reaching out to Estillo Estates. Our hospitality concierge will be in touch shortly.</p>
+                <div id="bookingFormSuccess" class="form-success" hidden>
+                    <div class="form-success-mark" aria-hidden="true">✓</div>
+                    <h3>Inquiry Received!</h3>
+                    <p>Thank you for reaching out to Estillo Estates. Our hospitality concierge will be in touch shortly.</p>
                 </div>
             </div>
         </div>

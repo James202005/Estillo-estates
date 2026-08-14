@@ -5,28 +5,30 @@
     left: 0;
     right: 0;
     z-index: 1000;
-    height: var(--header-height);
+    height: calc(var(--header-height) + var(--safe-top));
+    padding-top: var(--safe-top);
     background: var(--glass-bg);
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
     border-bottom: 1px solid var(--glass-border);
-    transition: var(--transition-base);
+    transition: height var(--transition-base), background var(--transition-base), box-shadow var(--transition-base);
 }
 
 .site-header.scrolled {
     background: rgba(250, 247, 242, 0.96);
     box-shadow: var(--shadow-sm);
-    height: 72px;
+    height: calc(var(--header-height-scrolled) + var(--safe-top));
 }
 
 .header-inner {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 max(var(--gutter), var(--safe-right)) 0 max(var(--gutter), var(--safe-left));
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
 }
 
 .main-nav {
@@ -59,21 +61,34 @@
     transition: width 0.3s ease;
 }
 
-.main-nav a:hover::after,
 .main-nav a.active::after {
     width: 100%;
 }
 
-.main-nav a:hover,
 .main-nav a.active {
     color: var(--color-gold);
+}
+
+/* Hover effects only where a real pointer exists — on touch screens
+   :hover sticks after a tap and leaves links stranded in a hover state. */
+@media (hover: hover) and (pointer: fine) {
+    .main-nav a:hover::after {
+        width: 100%;
+    }
+
+    .main-nav a:hover {
+        color: var(--color-gold);
+    }
 }
 
 /* Footer Layout */
 .site-footer {
     background: var(--color-dark-bg);
     color: var(--color-cream);
-    padding: 6rem 2rem 3rem;
+    padding: clamp(3.5rem, 8vw, 6rem) var(--gutter) 3rem;
+    padding-left: max(var(--gutter), var(--safe-left));
+    padding-right: max(var(--gutter), var(--safe-right));
+    padding-bottom: calc(3rem + var(--safe-bottom));
     border-top: 1px solid var(--color-dark-border);
 }
 
@@ -120,9 +135,11 @@
     transition: var(--transition-fast);
 }
 
-.footer-col a:hover {
-    color: var(--color-gold-light);
-    transform: translateX(3px);
+@media (hover: hover) and (pointer: fine) {
+    .footer-col a:hover {
+        color: var(--color-gold-light);
+        transform: translateX(3px);
+    }
 }
 
 .footer-bottom {
