@@ -4,30 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estillo Estates — Designed Spaces. Meaningful Stays.</title>
+    <meta name="description" content="Estillo Estates is a premier hospitality and property development brand crafting intentional spaces, luxury stays, and lasting legacy destinations.">
+    
+    <!-- OpenGraph SEO Tags -->
+    <meta property="og:title" content="Estillo Estates — Designed Spaces. Meaningful Stays.">
+    <meta property="og:description" content="A growing hospitality and property development brand built around thoughtful design, quality craftsmanship, and genuine hospitality.">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="modules/base.css">
-    <link rel="stylesheet" href="modules/layout.css">
-    <link rel="stylesheet" href="modules/components.css">
-    <link rel="stylesheet" href="modules/sections.css">
-    <link rel="stylesheet" href="modules/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Master CSS Design System Bundle -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Header Navigation Bar -->
     <header class="site-header" id="siteHeader">
         <div class="header-inner">
-            <a href="#" class="logo">ESTILLO<span>.</span>ESTATES</a>
+            <a href="#" class="logo" id="logoLink">ESTILLO<span>.</span>ESTATES</a>
             <nav class="main-nav" id="mainNav">
                 <a href="#story">Our Story</a>
                 <a href="#portfolio">Portfolio</a>
                 <a href="#brand">Brand Promise</a>
                 <a href="#values">Values</a>
                 <a href="#future">Future</a>
-                <a href="#contact" class="nav-cta">Get In Touch</a>
+                <a href="#contact" class="nav-cta open-booking-modal">Get In Touch</a>
             </nav>
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -35,17 +41,17 @@
         </div>
     </header>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
         <a href="#story">Our Story</a>
         <a href="#portfolio">Portfolio</a>
         <a href="#brand">Brand Promise</a>
         <a href="#values">Values</a>
         <a href="#future">Future</a>
-        <a href="#contact">Get In Touch</a>
+        <a href="#contact" class="open-booking-modal">Get In Touch</a>
     </div>
 
-    <!-- Hero -->
+    <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="hero-content">
             <span class="hero-eyebrow">Estillo Estates</span>
@@ -59,7 +65,7 @@
                 thoughtful design, quality craftsmanship, and genuine hospitality.
             </p>
             <div class="hero-actions">
-                <a href="#portfolio" class="btn btn-primary">Explore Our Portfolio</a>
+                <a href="#portfolio" class="btn btn-primary">Explore Portfolio</a>
                 <a href="#story" class="btn btn-secondary">Our Story</a>
             </div>
         </div>
@@ -71,7 +77,7 @@
         </div>
     </section>
 
-    <!-- Our Story -->
+    <!-- Our Story Section -->
     <section class="section story-section" id="story">
         <div class="section-inner">
             <div class="story-grid">
@@ -111,23 +117,31 @@
         </div>
     </section>
 
-    <!-- Portfolio -->
+    <!-- Portfolio Section -->
     <section class="section portfolio-section" id="portfolio">
         <div class="section-inner">
-            <div class="portfolio-header reveal">
+            <div class="portfolio-header reveal" style="text-align: center; max-width: 700px; margin: 0 auto;">
                 <span class="section-label">Hospitality Portfolio</span>
                 <h2 class="section-title">Our Growing Collection</h2>
-                <p class="section-description">
+                <p class="section-description" style="margin: 0 auto;">
                     Estillo Estates serves as the parent brand for a growing collection of
-                    thoughtfully designed hospitality concepts.
+                    thoughtfully designed hospitality concepts and real estate developments.
                 </p>
             </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="portfolio-filters reveal reveal-delay-1">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="live">Live Stays</button>
+                <button class="filter-btn" data-filter="upcoming">Upcoming Projects</button>
+            </div>
+
             <div class="portfolio-grid">
-                <!-- Property 1 -->
-                <div class="property-card reveal reveal-delay-1">
+                <!-- Property Card 1 -->
+                <div class="property-card reveal reveal-delay-1" data-category="live" data-property-id="cozy-home">
                     <div class="property-card-image">
                         <span class="property-badge live">Live</span>
-                        <span class="icon-placeholder">SH</span>
+                        <img src="assets/property_cozy.png" alt="Semi-Industrial Cozy Home interior showcase">
                     </div>
                     <div class="property-card-body">
                         <span class="years">2025 — Present</span>
@@ -136,45 +150,57 @@
                             A warm and thoughtfully designed home created for comfortable stays,
                             relaxed gatherings, and memorable moments.
                         </p>
+                        <div class="property-card-footer">
+                            <span>Explore Details</span>
+                            <span>→</span>
+                        </div>
                     </div>
                 </div>
-                <!-- Property 2 -->
-                <div class="property-card reveal reveal-delay-2">
+
+                <!-- Property Card 2 -->
+                <div class="property-card reveal reveal-delay-2" data-category="live" data-property-id="soak-screen">
                     <div class="property-card-image">
                         <span class="property-badge live">Live</span>
-                        <span class="icon-placeholder">SU</span>
+                        <img src="assets/property_cozy.png" alt="Soak Screen Urban Hideaway showcase">
                     </div>
                     <div class="property-card-body">
                         <span class="years">2026 — Present</span>
                         <h3>Soak | Screen Urban Hideaway</h3>
                         <p>
                             A private urban retreat designed around relaxation, entertainment,
-                            and shared experiences—bringing together a private pool, outdoor
-                            spaces, and an immersive stay experience.
+                            and shared experiences—bringing together a private pool and screening lounge.
                         </p>
+                        <div class="property-card-footer">
+                            <span>Explore Details</span>
+                            <span>→</span>
+                        </div>
                     </div>
                 </div>
-                <!-- Upcoming -->
-                <div class="upcoming-card reveal reveal-delay-3">
-                    <div class="upcoming-card-image">
-                        <span class="icon-placeholder">EIS</span>
+
+                <!-- Property Card 3 -->
+                <div class="property-card reveal reveal-delay-3" data-category="upcoming" data-property-id="industrial-suites">
+                    <div class="property-card-image">
+                        <span class="property-badge upcoming">Target — 2028</span>
+                        <img src="assets/hero_bg.png" alt="Estillo Industrial Suites architecture facade rendering">
                     </div>
-                    <div class="upcoming-card-body">
+                    <div class="property-card-body">
                         <span class="years">Target Launch — 2028</span>
                         <h3>Estillo Industrial Suites (EIS)</h3>
                         <p>
-                            A new hospitality concept envisioned to bring together designed
-                            accommodations, café culture, and lifestyle spaces under one destination.
-                            EIS represents the next chapter of Estillo Estates—expanding beyond
-                            short-term stays into a more complete hospitality experience.
+                            A new hospitality concept envisioned to bring together designed accommodations,
+                            café culture, and lifestyle spaces under one destination.
                         </p>
+                        <div class="property-card-footer">
+                            <span>Explore Vision</span>
+                            <span>→</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Brand Promise -->
+    <!-- Brand Promise Section -->
     <section class="section brand-section" id="brand">
         <div class="section-inner">
             <div class="reveal" style="text-align: center; max-width: 680px; margin: 0 auto;">
@@ -215,7 +241,7 @@
         </div>
     </section>
 
-    <!-- Values -->
+    <!-- Values Section -->
     <section class="section values-section" id="values">
         <div class="section-inner">
             <div class="reveal">
@@ -250,7 +276,7 @@
         </div>
     </section>
 
-    <!-- Future -->
+    <!-- Future Section -->
     <section class="section future-section" id="future">
         <div class="section-inner">
             <div class="future-content">
@@ -274,19 +300,19 @@
                 </div>
                 <div class="future-stats reveal reveal-delay-1">
                     <div class="stat-card">
-                        <div class="stat-number">2+</div>
+                        <div class="stat-number" data-target="2">2+</div>
                         <div class="stat-label">Active Properties</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">1</div>
+                        <div class="stat-number" data-target="1">1</div>
                         <div class="stat-label">Upcoming Development</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">∞</div>
-                        <div class="stat-label">Meaningful Experiences</div>
+                        <div class="stat-number" data-target="99">99%</div>
+                        <div class="stat-label">Guest Satisfaction</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">2025</div>
+                        <div class="stat-number" data-target="2025">2025</div>
                         <div class="stat-label">Year Established</div>
                     </div>
                 </div>
@@ -314,15 +340,15 @@
                 </div>
                 <div class="footer-col">
                     <h5>Properties</h5>
-                    <a href="#">Semi-Industrial Cozy Home</a>
-                    <a href="#">Soak | Screen Urban Hideaway</a>
-                    <a href="#">Estillo Industrial Suites</a>
+                    <a href="#portfolio">Semi-Industrial Cozy Home</a>
+                    <a href="#portfolio">Soak | Screen Hideaway</a>
+                    <a href="#portfolio">Estillo Industrial Suites</a>
                 </div>
                 <div class="footer-col">
                     <h5>Contact</h5>
                     <a href="mailto:hello@estilloestates.com">hello@estilloestates.com</a>
-                    <a href="#">Book a Stay</a>
-                    <a href="#">Partner With Us</a>
+                    <a href="#" class="open-booking-modal">Inquire / Book a Stay</a>
+                    <a href="#" class="open-booking-modal">Partner With Us</a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -332,95 +358,80 @@
         </div>
     </footer>
 
-    <script>
-        // Header scroll effect
-        const header = document.getElementById('siteHeader');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 60) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+    <!-- Property Quick-View Modal Overlay -->
+    <div class="modal-overlay" id="propertyModal" aria-hidden="true">
+        <div class="modal-card">
+            <button class="modal-close" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+            <div class="modal-body">
+                <div style="display:flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; margin-bottom: 0.6rem;">
+                    <span class="section-label" style="margin-bottom:0;" id="modalPropCapacity">Capacity</span>
+                    <span id="modalPropLocation" style="font-size: 0.78rem; color: var(--color-gray); letter-spacing: 0.08em;">Location</span>
+                </div>
+                <h2 id="modalPropTitle" style="font-family: var(--font-serif); font-size: 2.2rem; margin-bottom: 0.4rem;">Property Title</h2>
+                <p id="modalPropTagline" style="color: var(--color-gold); font-weight: 600; margin-bottom: 1.2rem;">Property Tagline</p>
+                
+                <div style="border-radius: var(--border-radius-md); overflow: hidden; margin-bottom: 1.5rem; max-height: 280px;">
+                    <img id="modalPropImage" src="" alt="Property detail view" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
 
-        // Mobile menu toggle
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileLinks = mobileMenu.querySelectorAll('a');
+                <p id="modalPropDesc" style="color: var(--color-gray); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;">Property Description</p>
+                
+                <div style="background: var(--color-cream); padding: 1.2rem; border-radius: var(--border-radius-md); margin-bottom: 1.8rem;">
+                    <h5 style="font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-charcoal); margin-bottom: 0.8rem;">Key Amenities & Features</h5>
+                    <ul id="modalPropAmenities" style="list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.88rem; color: var(--color-gray);"></ul>
+                </div>
 
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            mobileMenu.classList.toggle('open');
-            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
-        });
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button class="btn btn-primary open-booking-modal" style="width: 100%;">Inquire / Reserve Stay</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                mobileMenu.classList.remove('open');
-                document.body.style.overflow = '';
-            });
-        });
+    <!-- Interactive Booking / Inquiry Modal Overlay -->
+    <div class="modal-overlay" id="bookingModal" aria-hidden="true">
+        <div class="modal-card" style="max-width: 540px;">
+            <button class="modal-close" id="bookingCloseBtn" aria-label="Close modal">&times;</button>
+            <div class="modal-body">
+                <span class="section-label">Connect With Us</span>
+                <h2 style="font-family: var(--font-serif); font-size: 2rem; margin-bottom: 0.5rem;">Book a Stay or Inquire</h2>
+                <p style="color: var(--color-gray); font-size: 0.9rem; margin-bottom: 1.8rem;">Send your inquiry directly to our Estillo Estates hospitality concierge.</p>
+                
+                <form id="bookingForm">
+                    <div style="margin-bottom: 1.2rem;">
+                        <label style="display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; color: var(--color-charcoal);">Full Name</label>
+                        <input type="text" required placeholder="e.g. Alex Estilloro" style="width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--color-border); border-radius: var(--border-radius-sm); outline: none;">
+                    </div>
+                    <div style="margin-bottom: 1.2rem;">
+                        <label style="display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; color: var(--color-charcoal);">Email Address</label>
+                        <input type="email" required placeholder="alex@example.com" style="width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--color-border); border-radius: var(--border-radius-sm); outline: none;">
+                    </div>
+                    <div style="margin-bottom: 1.2rem;">
+                        <label style="display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; color: var(--color-charcoal);">Property of Interest</label>
+                        <select style="width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--color-border); border-radius: var(--border-radius-sm); outline: none; background: var(--color-white);">
+                            <option value="cozy-home">Semi-Industrial Cozy Home</option>
+                            <option value="soak-screen">Soak | Screen Urban Hideaway</option>
+                            <option value="industrial-suites">Estillo Industrial Suites (2028 Development)</option>
+                            <option value="general">General Partnership / Inquiry</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 1.8rem;">
+                        <label style="display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; color: var(--color-charcoal);">Message / Requested Stay Dates</label>
+                        <textarea rows="3" required placeholder="Tell us about your trip or inquiry..." style="width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--color-border); border-radius: var(--border-radius-sm); outline: none; resize: vertical;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Inquiry</button>
+                </form>
 
-        // Active nav link based on scroll position
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.main-nav a:not(.nav-cta)');
+                <div id="bookingFormSuccess" style="display: none; text-align: center; padding: 2rem 1rem;">
+                    <div style="font-size: 3rem; color: var(--color-gold); margin-bottom: 1rem;">✓</div>
+                    <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 0.6rem;">Inquiry Received!</h3>
+                    <p style="color: var(--color-gray); font-size: 0.95rem;">Thank you for reaching out to Estillo Estates. Our hospitality concierge will be in touch shortly.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        function updateActiveNav() {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                const sectionBottom = sectionTop + section.offsetHeight;
-                if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
-                    current = section.id;
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', updateActiveNav);
-        updateActiveNav();
-
-        // Intersection Observer for reveal animations
-        const revealElements = document.querySelectorAll('.reveal');
-
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    // Optionally unobserve after reveal for performance
-                    // revealObserver.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        });
-
-        revealElements.forEach(el => revealObserver.observe(el));
-
-        // Smooth scroll for anchor links (fallback for older browsers)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    e.preventDefault();
-                    const targetPosition = targetElement.offsetTop - 70;
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
+    <!-- Application JavaScript Entry Point -->
+    <script src="js/main.js"></script>
 </body>
 </html>
