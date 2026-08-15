@@ -26,6 +26,7 @@
             capacity: '6 Guests',
             rate: '₱2,500',
             rating: '5.0 · Guest favorite · Top 5% of homes',
+            airbnb: 'https://www.airbnb.com/rooms/1591042140564793687',
             tagline: 'Warm design meets semi-industrial calm.',
             specs: ['6 guests', '2 bedrooms', '3 beds', 'Entire home'],
             gallery: [
@@ -50,6 +51,7 @@
             capacity: '9 Guests',
             rate: '₱4,699',
             rating: '5.0 · Guest favorite · Top 5% of homes',
+            airbnb: 'https://www.airbnb.com/rooms/1330278337522141292',
             tagline: 'Private cinema pool staycation.',
             specs: ['9 guests', '4 bedrooms', '5 beds', 'Entire home'],
             gallery: [
@@ -74,6 +76,7 @@
             capacity: 'Boutique Complex',
             rate: '',
             rating: '',
+            airbnb: '',
             tagline: 'Boutique accommodations meets café culture.',
             specs: ['Boutique suites', 'Café', 'Lifestyle spaces'],
             gallery: [
@@ -417,6 +420,21 @@
                     : `<span>${data.years}</span>`;
             }
 
+            /* Live stays book on Airbnb; the unbuilt EIS has no listing,
+               so it only offers the direct-contact sheet. */
+            const bookBtn = document.getElementById('modalPropBook');
+            const contactBtn = document.getElementById('modalPropContact');
+            if (bookBtn) {
+                bookBtn.hidden = !data.airbnb;
+                if (data.airbnb) {
+                    bookBtn.href = data.airbnb;
+                    bookBtn.textContent = `Book ${data.title} on Airbnb`;
+                }
+            }
+            if (contactBtn) {
+                contactBtn.textContent = data.airbnb ? 'Other ways to book' : 'Talk to us about EIS';
+            }
+
             buildGallery(data);
 
             layers.open(propertyLayer);
@@ -566,14 +584,14 @@
         }
     }
 
-    /* 5. Booking & Inquiry Modal */
+    /* 5. Get In Touch Modal — booking runs through Airbnb */
     function initBookingModal() {
         const bookingOverlay = document.getElementById('bookingModal');
         const closeBookingBtn = document.getElementById('bookingCloseBtn');
         const openBookingBtns = document.querySelectorAll('.open-booking-modal');
-        const bookingForm = document.getElementById('bookingForm');
-        const formSuccessState = document.getElementById('bookingFormSuccess');
-        const propertySelect = document.getElementById('bookingProperty');
+        const options = bookingOverlay
+            ? bookingOverlay.querySelectorAll('.booking-option')
+            : [];
 
         if (!bookingOverlay) return;
 
@@ -587,25 +605,22 @@
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
 
-                // Reopening after a submit should offer a fresh form, not the
-                // previous confirmation. Runs before the pre-select below so
-                // reset() can't wipe the chosen property.
-                if (bookingForm && bookingForm.hidden) {
-                    bookingForm.reset();
-                    bookingForm.hidden = false;
-                    if (formSuccessState) formSuccessState.hidden = true;
-                }
-
                 // Swap a property sheet for the booking sheet instead of
                 // stacking two full-screen sheets on a phone
+                let openProperty = null;
                 const propertyLayer = initPortfolio.propertyLayer;
                 if (propertyLayer && layers.isOpen(propertyLayer)) {
                     const openTitle = document.getElementById('modalPropTitle');
-                    const match = openTitle && Object.keys(propertiesData)
+                    openProperty = openTitle && Object.keys(propertiesData)
                         .find(key => propertiesData[key].title === openTitle.textContent);
-                    if (match && propertySelect) propertySelect.value = match;
                     layers.close(propertyLayer);
                 }
+
+                // Carry the property the guest was already looking at
+                // to the top of the list and mark it
+                options.forEach(opt => {
+                    opt.classList.toggle('highlighted', !!openProperty && opt.dataset.property === openProperty);
+                });
 
                 layers.open(bookingLayer);
                 const card = bookingOverlay.querySelector('.modal-card');
@@ -621,24 +636,11 @@
             if (e.target === bookingOverlay) layers.close(bookingLayer);
         });
 
-        if (bookingForm) {
-            bookingForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-
-                // novalidate is set so we can show the browser's own messages
-                // only after an explicit submit attempt
-                if (!bookingForm.checkValidity()) {
-                    bookingForm.reportValidity();
-                    return;
-                }
-
-                bookingForm.hidden = true;
-                if (formSuccessState) {
-                    formSuccessState.hidden = false;
-                    formSuccessState.setAttribute('role', 'status');
-                }
-            });
-        }
+        // Airbnb opens in a new tab, so dismiss the sheet behind it —
+        // returning guests shouldn't land back on a stale overlay
+        options.forEach(option => {
+            option.addEventListener('click', () => layers.close(bookingLayer));
+        });
     }
 
     /* 6. Smooth Scrolling */

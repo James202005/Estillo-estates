@@ -709,84 +709,132 @@
     gap: 0.85rem;
 }
 
-/* Form Controls */
-.form-field {
-    margin-bottom: 1.2rem;
-}
-
-.form-field-last {
+/* Booking options — one row per Airbnb listing */
+.booking-options {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
     margin-bottom: 1.8rem;
 }
 
-.form-label {
-    display: block;
-    font-size: 0.75rem;
+.booking-option {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.7rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    background: var(--color-white);
+    transition: var(--transition-fast);
+}
+
+.booking-option img {
+    width: 74px;
+    height: 74px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: var(--border-radius-sm);
+}
+
+.booking-option-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+    flex: 1;
+}
+
+.booking-option-name {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
     font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
+    line-height: 1.15;
     color: var(--color-charcoal);
 }
 
-.form-control {
-    width: 100%;
-    min-height: var(--tap-target);
-    padding: 0.8rem 1rem;
-    /* 16px keeps iOS Safari from zooming in when a field is focused */
-    font-size: 16px;
-    background: var(--color-white);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-sm);
-    outline: none;
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-textarea.form-control {
-    resize: vertical;
-    min-height: 6rem;
-}
-
-.form-select {
-    /* Native chevron is removed by appearance:none, so draw our own */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b6761' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.9rem center;
-    background-size: 1.05rem;
-    padding-right: 2.6rem;
-}
-
-.form-control:focus {
-    border-color: var(--color-gold);
-    box-shadow: 0 0 0 3px rgba(184, 151, 90, 0.18);
-}
-
-.form-control:user-invalid {
-    border-color: #c0563f;
-}
-
-.form-success {
-    text-align: center;
-    padding: 2rem 1rem;
-}
-
-.form-success-mark {
-    font-size: 3rem;
-    color: var(--color-gold);
-    margin-bottom: 1rem;
-    line-height: 1;
-}
-
-.form-success h3 {
-    font-family: var(--font-serif);
-    font-size: 1.8rem;
-    margin-bottom: 0.6rem;
-}
-
-.form-success p {
+.booking-option-sub {
+    font-size: 0.76rem;
     color: var(--color-gray);
-    font-size: 0.95rem;
+    line-height: 1.35;
+}
+
+.booking-option-rate {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--color-charcoal);
+    margin-top: 0.15rem;
+}
+
+.booking-option-rate span {
+    font-weight: 500;
+    color: var(--color-gray);
+}
+
+.booking-option-go {
+    flex-shrink: 0;
+    color: var(--color-gold);
+    font-size: 1.1rem;
+    padding-right: 0.3rem;
+}
+
+/* Marks the stay the guest was just viewing */
+.booking-option.highlighted {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 3px rgba(184, 151, 90, 0.15);
+}
+
+.booking-option:active {
+    transform: scale(0.99);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .booking-option:hover {
+        border-color: var(--color-gold-light);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+    }
+}
+
+/* Direct-contact block under the listings */
+.booking-direct {
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5rem;
+}
+
+.booking-direct h5 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-charcoal);
+    margin-bottom: 0.9rem;
+}
+
+.booking-direct-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem 1.4rem;
+    margin-top: 0.9rem;
+}
+
+.booking-direct-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap-target);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--color-gold);
+}
+
+.booking-note {
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--color-gray);
+    text-align: center;
+    margin-top: 0.4rem;
 }
 
 /* Sticky Mobile Action Bar (phones only, revealed past the hero) */

@@ -38,12 +38,28 @@
 }
 
 @media (max-width: 768px) {
+    /* Portrait crop of the same photo — a landscape frame scaled to cover
+       a tall phone viewport would show only a narrow slice of the scene */
+    .hero {
+        background-image: linear-gradient(180deg, rgba(20, 18, 16, 0.45) 0%, rgba(20, 18, 16, 0.78) 100%),
+                          url('../assets/hero-mobile.webp');
+    }
+
     .hero-actions {
         flex-direction: column;
         width: 100%;
         max-width: 340px;
         margin: 0 auto;
         gap: 0.85rem;
+    }
+
+    /* Sits above the scroll cue rather than beside it */
+    .hero-credit {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: calc(5.4rem + var(--safe-bottom));
+        text-align: center;
+        font-size: 0.64rem;
     }
 
     .hero-actions .btn {
@@ -248,6 +264,11 @@
         font-size: 0.68rem;
         letter-spacing: 0.28em;
         padding: 0.35rem 0.9rem;
+    }
+
+    /* Keep the hero credit to a single line on small phones */
+    .hero-credit-more {
+        display: none;
     }
 
     .hero-subtitle {

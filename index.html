@@ -21,13 +21,18 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="assets/logo.png">
 
+    <!-- Hero is the LCP element; preload the crop this viewport will actually use -->
+    <link rel="preload" as="image" href="assets/hero-mobile.webp" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/hero.webp" media="(min-width: 769px)" fetchpriority="high">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Master CSS Design System Bundle -->
-    <link rel="stylesheet" href="css/styles.css">
+    <!-- Master CSS Design System Bundle. Bump ?v= here and in styles.css
+         after editing CSS so browsers don't serve a stale copy. -->
+    <link rel="stylesheet" href="css/styles.css?v=3">
 </head>
 <body>
 
@@ -109,6 +114,10 @@
                 <a href="#story" class="btn btn-secondary">Our Story</a>
             </div>
         </div>
+        <a class="hero-credit" href="#portfolio">
+            <span class="hero-credit-dot" aria-hidden="true"></span>
+            <span class="hero-credit-text">Pictured: <strong>Savannah</strong><span class="hero-credit-more"> — Soak | Screen Hideaway</span>, Oton, Iloilo</span>
+        </a>
         <div class="hero-scroll-indicator" aria-hidden="true">
             <span>Scroll</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -255,6 +264,7 @@
                              sizes="(max-width: 768px) 100vw, 380px"
                              alt="Estillo Industrial Suites architecture concept rendering"
                              loading="lazy" decoding="async" width="800" height="533">
+                        <span class="property-rating property-rating-note">Concept rendering — not a built unit</span>
                     </div>
                     <div class="property-card-body">
                         <span class="years">In Development · Target 2028</span>
@@ -504,57 +514,71 @@
 
                 <div class="modal-actions">
                     <div class="modal-rate" id="modalPropRate"></div>
-                    <button type="button" class="btn btn-primary btn-block open-booking-modal">Inquire / Reserve Stay</button>
+                    <a class="btn btn-primary btn-block" id="modalPropBook" href="#" target="_blank" rel="noopener noreferrer">Book on Airbnb</a>
+                    <button type="button" class="btn btn-secondary btn-block open-booking-modal" id="modalPropContact">Other ways to book</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Interactive Booking / Inquiry Modal Overlay -->
+    <!-- Get In Touch / Booking Modal Overlay -->
     <div class="modal-overlay" id="bookingModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
         <div class="modal-card modal-card-sm">
             <div class="modal-grabber" aria-hidden="true"></div>
-            <button class="modal-close" id="bookingCloseBtn" type="button" aria-label="Close inquiry form">&times;</button>
+            <button class="modal-close" id="bookingCloseBtn" type="button" aria-label="Close booking options">&times;</button>
             <div class="modal-body">
-                <span class="section-label">Connect With Us</span>
-                <h2 class="modal-title" id="bookingModalTitle">Book a Stay or Inquire</h2>
-                <p class="modal-desc modal-desc-tight">Send your inquiry directly to our Estillo Estates hospitality concierge.</p>
+                <span class="section-label">Get In Touch</span>
+                <h2 class="modal-title" id="bookingModalTitle">Book Your Stay</h2>
+                <p class="modal-desc modal-desc-tight">
+                    Both homes are booked through Airbnb — tap a stay to see live dates,
+                    reviews and instant booking. Prefer to talk first? Message us directly.
+                </p>
 
-                <form id="bookingForm" novalidate>
-                    <div class="form-field">
-                        <label class="form-label" for="bookingName">Full Name</label>
-                        <input class="form-control" id="bookingName" name="name" type="text" required autocomplete="name" placeholder="e.g. Alex Estilloro">
-                    </div>
-                    <div class="form-field">
-                        <label class="form-label" for="bookingEmail">Email Address</label>
-                        <input class="form-control" id="bookingEmail" name="email" type="email" required autocomplete="email" inputmode="email" placeholder="alex@example.com">
-                    </div>
-                    <div class="form-field">
-                        <label class="form-label" for="bookingProperty">Property of Interest</label>
-                        <select class="form-control form-select" id="bookingProperty" name="property">
-                            <option value="lumina">Lumina — Semi-Industrial Cozy Home (₱2,500/night)</option>
-                            <option value="savannah">Savannah — Soak | Screen Urban Hideaway (₱4,699/night)</option>
-                            <option value="industrial-suites">Estillo Industrial Suites (2028 Development)</option>
-                            <option value="general">General Partnership / Inquiry</option>
-                        </select>
-                    </div>
-                    <div class="form-field form-field-last">
-                        <label class="form-label" for="bookingMessage">Message / Requested Stay Dates</label>
-                        <textarea class="form-control" id="bookingMessage" name="message" rows="3" required placeholder="Tell us about your trip or inquiry..."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Submit Inquiry</button>
-                </form>
+                <ul class="booking-options">
+                    <li>
+                        <a class="booking-option" data-property="lumina"
+                           href="https://www.airbnb.com/rooms/1591042140564793687"
+                           target="_blank" rel="noopener noreferrer">
+                            <img src="assets/properties/lumina-thumb.webp" alt="" width="74" height="74" decoding="async">
+                            <span class="booking-option-body">
+                                <span class="booking-option-name">Lumina</span>
+                                <span class="booking-option-sub">Semi-Industrial Cozy Home · 6 guests</span>
+                                <span class="booking-option-rate">₱2,500 <span>/ night</span></span>
+                            </span>
+                            <span class="booking-option-go" aria-hidden="true">→</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="booking-option" data-property="savannah"
+                           href="https://www.airbnb.com/rooms/1330278337522141292"
+                           target="_blank" rel="noopener noreferrer">
+                            <img src="assets/properties/savannah-thumb.webp" alt="" width="74" height="74" decoding="async">
+                            <span class="booking-option-body">
+                                <span class="booking-option-name">Savannah</span>
+                                <span class="booking-option-sub">Soak | Screen Hideaway · 9 guests</span>
+                                <span class="booking-option-rate">₱4,699 <span>/ night</span></span>
+                            </span>
+                            <span class="booking-option-go" aria-hidden="true">→</span>
+                        </a>
+                    </li>
+                </ul>
 
-                <div id="bookingFormSuccess" class="form-success" hidden>
-                    <div class="form-success-mark" aria-hidden="true">✓</div>
-                    <h3>Inquiry Received!</h3>
-                    <p>Thank you for reaching out to Estillo Estates. Our hospitality concierge will be in touch shortly.</p>
+                <div class="booking-direct">
+                    <h5>Message us directly</h5>
+                    <a class="btn btn-secondary btn-block" href="tel:+639618081487">Call or text 0961 808 1487</a>
+                    <div class="booking-direct-links">
+                                                <a href="https://www.facebook.com/profile.php?id=61573081126916" target="_blank" rel="noopener noreferrer">Facebook</a>
+                        <a href="https://www.instagram.com/semi.industrialcozyhome" target="_blank" rel="noopener noreferrer">Instagram</a>
+                    </div>
+                    <p class="booking-note">
+                        Partnership or EIS enquiries? Call or message us on any channel above.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Application JavaScript Entry Point -->
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=3"></script>
 </body>
 </html>

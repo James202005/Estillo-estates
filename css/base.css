@@ -36,6 +36,12 @@ body.is-locked {
     overflow: hidden;
 }
 
+/* The [hidden] attribute must beat any class that sets a display value
+   (.btn is inline-flex, .gallery-dots is flex) or JS-hidden elements stay visible */
+[hidden] {
+    display: none !important;
+}
+
 img {
     max-width: 100%;
     height: auto;
