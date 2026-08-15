@@ -436,8 +436,8 @@
             // screens pull the 1400w. The next slide is eager so a swipe
             // doesn't land on an empty frame.
             track.innerHTML = data.gallery.map(([slug, alt], i) => (
-                `<img src="assets/properties/${slug}.jpg"
-                      srcset="assets/properties/${slug}.jpg 800w, assets/properties/${slug}-lg.jpg 1400w"
+                `<img src="assets/properties/${slug}.webp"
+                      srcset="assets/properties/${slug}.webp 800w, assets/properties/${slug}-lg.webp 1400w"
                       sizes="(max-width: 768px) 92vw, 600px"
                       alt="${alt}"
                       loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async"

@@ -1,0 +1,22 @@
+# ── Raw source photos ───────────────────────────────────────────────────────
+# These are the unprocessed originals from the camera / social export.
+# They are kept locally but NOT pushed to GitHub (too heavy for the repo).
+for estillo website/
+
+# ── Original heavy PNGs (WebP versions are committed instead) ────────────────
+assets/hero_bg.png
+assets/property_cozy.png
+
+# ── Original JPGs in properties/ (WebP versions are committed instead) ───────
+assets/properties/*.jpg
+
+# ── OS / editor junk ─────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+
+# ── Node (if ever added) ─────────────────────────────────────────────────────
+node_modules/
