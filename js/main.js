@@ -80,7 +80,7 @@
             tagline: 'Boutique accommodations meets café culture.',
             specs: ['Boutique suites', 'Café', 'Lifestyle spaces'],
             gallery: [
-                ['eis-concept', 'Estillo Industrial Suites architectural concept rendering']
+                ['eis-concept', 'Estillo Industrial Suites — in development, target launch 2028']
             ],
             description: 'A flagship hospitality concept envisioned to unite designer accommodations, artisanal café culture, and curated lifestyle retail spaces. EIS marks the expansion of Estillo Estates into full-scale hospitality destinations.',
             amenities: [ 'Boutique Luxury Suites', 'Co-Working Lounge', 'Wellness & Sauna Deck', 'Design Concept Store'],
