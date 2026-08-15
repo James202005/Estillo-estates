@@ -157,8 +157,30 @@
         right: 0.85rem;
     }
 
-    .modal-figure {
-        aspect-ratio: 3 / 2;
+    /* Full-bleed gallery inside the sheet — edge-to-edge reads as swipeable */
+    .modal-gallery {
+        margin-left: -1.35rem;
+        margin-right: -1.35rem;
+    }
+
+    .gallery-track {
+        border-radius: 0;
+        gap: 0;
+        padding: 0 1.35rem;
+        /* Peek the next photo so it's obvious there are more */
+        scroll-padding: 0 1.35rem;
+    }
+
+    .gallery-track img {
+        flex-basis: calc(100% - 2.2rem);
+        width: calc(100% - 2.2rem);
+        margin-right: 0.5rem;
+        aspect-ratio: 4 / 3;
+        scroll-snap-align: start;
+    }
+
+    .gallery-track img:last-child {
+        margin-right: 0;
     }
 }
 

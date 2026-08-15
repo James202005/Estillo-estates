@@ -107,7 +107,10 @@
 .footer-brand .logo {
     color: var(--color-cream);
     margin-bottom: 1.2rem;
-    display: inline-block;
+    /* Explicit lockup — inline-block let the mark and wordmark wrap apart */
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
 }
 
 .footer-brand p {
@@ -115,6 +118,17 @@
     font-size: 0.92rem;
     line-height: 1.7;
     max-width: 340px;
+    margin-bottom: 1.4rem;
+}
+
+/* Socials sit on the dark footer, so invert the icon chrome */
+.site-footer .social-links a {
+    border-color: rgba(255, 255, 255, 0.16);
+    color: var(--color-cream);
+}
+
+.site-footer .footer-brand .logo-text span {
+    color: var(--color-gold);
 }
 
 .footer-col h5 {

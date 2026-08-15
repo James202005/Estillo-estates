@@ -13,39 +13,75 @@
     const MOBILE_QUERY = '(max-width: 768px)';
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+    /* Property records mirror the printed listing sheets — specs, rates and
+       guest quotes are taken from those, so keep them in sync when a listing
+       changes. Gallery entries name the slug; -lg is appended for the sheet. */
     const propertiesData = {
-        'cozy-home': {
-            title: 'Semi-Industrial Cozy Home',
+        'lumina': {
+            title: 'Lumina',
+            subtitle: 'Semi-Industrial Cozy Home',
             category: 'live',
             years: '2025 — Present',
-            image: 'assets/property_cozy.png',
-            location: 'Metro Manila, Philippines',
-            capacity: 'Up to 6 Guests',
-            tagline: 'Warm design meets semi-industrial elegance.',
-            description: 'A thoughtfully designed private home created for comfortable stays, relaxed family gatherings, and memorable intimate celebrations. Features custom wood furnishings, exposed brick detailing, high-speed WiFi, smart entertainment, and full kitchen amenities.',
-            amenities: ['Exposed Brick Design', 'Fully Equipped Kitchen', 'High-Speed WiFi', 'Smart Entertainment System', 'Private Dedicated Workspace', 'Air Conditioned Suites']
+            location: 'Oton, Iloilo',
+            capacity: '6 Guests',
+            rate: '₱2,500',
+            rating: '5.0 · Guest favorite · Top 5% of homes',
+            tagline: 'Warm design meets semi-industrial calm.',
+            specs: ['6 guests', '2 bedrooms', '3 beds', 'Entire home'],
+            gallery: [
+                ['lumina-garden', 'Garden lounge with hanging swing chairs at night'],
+                ['lumina-living', 'Common area with sofa, staircase and layered rug'],
+                ['lumina-dining', 'Dining area beside the open kitchen'],
+                ['lumina-lounge', 'Entertainment lounge with wall-mounted screen'],
+                ['lumina-bedroom', 'Bedroom with natural light and workspace'],
+                ['lumina-patio', 'Outdoor patio and BBQ area after dark'],
+                ['lumina-exterior', 'Front exterior and garden walkway']
+            ],
+            description: 'Book the entire home in Oton, Iloilo. A hotel-clean, thoughtfully designed house built for comfortable stays, relaxed family gatherings and intimate celebrations — with a garden swing, outdoor dining and a full kitchen you can actually cook in.',
+            amenities: ['Hotel-clean, cozy home vibe', 'Fast WiFi + Netflix', 'Full kitchen', 'Garden swing + outdoor dining', 'Free parking', 'Hot & cold shower'],
+            quote: { text: 'The best house we’ve ever stayed in! Better than a hotel.', author: 'Ben' }
         },
-        'soak-screen': {
-            title: 'Soak | Screen Urban Hideaway',
+        'savannah': {
+            title: 'Savannah',
+            subtitle: 'Soak | Screen Urban Hideaway',
             category: 'live',
-            years: '2026 — Present',
-            image: 'assets/property_cozy.png',
-            location: 'Tagaytay / Urban Hideaway',
-            capacity: 'Up to 8 Guests',
-            tagline: 'Private urban retreat with pool & outdoor cinema.',
-            description: 'A private retreat crafted specifically around relaxation, outdoor entertainment, and shared moments. Guests can unwind in the private plunge pool, enjoy open-air movie screening under the stars, or relax in spacious indoor-outdoor lounge quarters.',
-            amenities: ['Private Plunge Pool', 'Outdoor Cinema Screen', 'Teak Wood Deck & Lounge', 'Outdoor BBQ Grill Area', 'Lush Tropical Garden', 'Curated Mood Lighting']
+            years: '2025 — Present',
+            location: 'Oton, Iloilo',
+            capacity: '9 Guests',
+            rate: '₱4,699',
+            rating: '5.0 · Guest favorite · Top 5% of homes',
+            tagline: 'Private cinema pool staycation.',
+            specs: ['9 guests', '4 bedrooms', '5 beds', 'Entire home'],
+            gallery: [
+                ['savannah-cinema', 'Outdoor cinema screen reflected in the pool at night'],
+                ['savannah-pool', 'Private swimming pool framed by bamboo screening'],
+                ['savannah-dining', 'Long communal dining table under the vaulted roof'],
+                ['savannah-kitchen', 'Kitchen island set for a shared dinner'],
+                ['savannah-bedroom', 'Bedroom with gallery wall and tall windows'],
+                ['savannah-poolnight', 'Pool deck lit for evening swims'],
+                ['savannah-exterior', 'Poolside exterior in daylight']
+            ],
+            description: 'A private retreat built around relaxation, outdoor entertainment and shared moments. Swim in the private pool, watch films projected open-air over the water, then gather everyone around the long kitchen island for dinner.',
+            amenities: ['Private swimming pool', 'Outdoor BBQ + dining area', 'Screen / movie area', 'Fully equipped kitchen', 'Fast WiFi', 'AC in all bedrooms + living room'],
+            quote: { text: 'Clean, relaxing, exactly as listed — the pool was a highlight.', author: 'Denev' }
         },
         'industrial-suites': {
-            title: 'Estillo Industrial Suites (EIS)',
+            title: 'Estillo Industrial Suites',
+            subtitle: 'EIS — Hospitality Destination',
             category: 'upcoming',
             years: 'Target Launch — 2028',
-            image: 'assets/hero_bg.png',
             location: 'Prime Destination (In Development)',
             capacity: 'Boutique Complex',
-            tagline: 'Boutique accommodations meets cafe culture.',
+            rate: '',
+            rating: '',
+            tagline: 'Boutique accommodations meets café culture.',
+            specs: ['Boutique suites', 'Café', 'Lifestyle spaces'],
+            gallery: [
+                ['eis-concept', 'Estillo Industrial Suites architectural concept rendering']
+            ],
             description: 'A flagship hospitality concept envisioned to unite designer accommodations, artisanal café culture, and curated lifestyle retail spaces. EIS marks the expansion of Estillo Estates into full-scale hospitality destinations.',
-            amenities: ['Artisanal Cafe & Bakery', 'Boutique Luxury Suites', 'Co-Working Lounge', 'Wellness & Sauna Deck', 'Design Concept Store', '24/7 Hospitality Concierge']
+            amenities: ['Artisanal Cafe & Bakery', 'Boutique Luxury Suites', 'Co-Working Lounge', 'Wellness & Sauna Deck', 'Design Concept Store', '24/7 Hospitality Concierge'],
+            quote: null
         }
     };
 
@@ -345,15 +381,15 @@
             if (!data) return;
 
             document.getElementById('modalPropTitle').textContent = data.title;
-            document.getElementById('modalPropTagline').textContent = data.tagline;
+            document.getElementById('modalPropTagline').textContent =
+                data.subtitle ? `${data.subtitle} — ${data.tagline}` : data.tagline;
             document.getElementById('modalPropDesc').textContent = data.description;
             document.getElementById('modalPropLocation').textContent = data.location;
-            document.getElementById('modalPropCapacity').textContent = data.capacity;
+            document.getElementById('modalPropCapacity').textContent = data.rating || data.capacity;
 
-            const modalImage = document.getElementById('modalPropImage');
-            if (modalImage) {
-                modalImage.src = data.image;
-                modalImage.alt = `${data.title} showcase`;
+            const specs = document.getElementById('modalPropSpecs');
+            if (specs) {
+                specs.innerHTML = data.specs.map(s => `<li>${s}</li>`).join('');
             }
 
             const amenitiesList = document.getElementById('modalPropAmenities');
@@ -363,10 +399,98 @@
                     .join('');
             }
 
+            const quote = document.getElementById('modalPropQuote');
+            if (quote) {
+                if (data.quote) {
+                    document.getElementById('modalPropQuoteText').textContent = `“${data.quote.text}”`;
+                    document.getElementById('modalPropQuoteAuthor').textContent = `— ${data.quote.author}, verified guest`;
+                    quote.hidden = false;
+                } else {
+                    quote.hidden = true;
+                }
+            }
+
+            const rate = document.getElementById('modalPropRate');
+            if (rate) {
+                rate.innerHTML = data.rate
+                    ? `<strong>${data.rate}</strong> <span>/ night · ${data.location}</span>`
+                    : `<span>${data.years}</span>`;
+            }
+
+            buildGallery(data);
+
             layers.open(propertyLayer);
             // Sheets are reused, so always start a fresh open at the top
-            const card_ = modalOverlay.querySelector('.modal-card');
-            if (card_) card_.scrollTop = 0;
+            const sheet = modalOverlay.querySelector('.modal-card');
+            if (sheet) sheet.scrollTop = 0;
+        }
+
+        /* Swipeable gallery — a scroll-snap track is the native-feeling
+           pattern on touch and still works with a trackpad or arrow keys. */
+        function buildGallery(data) {
+            const track = document.getElementById('modalGallery');
+            const dots = document.getElementById('modalGalleryDots');
+            if (!track) return;
+
+            // srcset keeps phones on the ~100KB 800w file; only wide/retina
+            // screens pull the 1400w. The next slide is eager so a swipe
+            // doesn't land on an empty frame.
+            track.innerHTML = data.gallery.map(([slug, alt], i) => (
+                `<img src="assets/properties/${slug}.jpg"
+                      srcset="assets/properties/${slug}.jpg 800w, assets/properties/${slug}-lg.jpg 1400w"
+                      sizes="(max-width: 768px) 92vw, 600px"
+                      alt="${alt}"
+                      loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async"
+                      draggable="false">`
+            )).join('');
+            track.scrollLeft = 0;
+
+            if (!dots) return;
+            const multiple = data.gallery.length > 1;
+            dots.hidden = !multiple;
+            dots.innerHTML = multiple
+                ? data.gallery.map((_, i) =>
+                    `<button type="button" class="gallery-dot${i === 0 ? ' active' : ''}" data-index="${i}"
+                             aria-label="Go to photo ${i + 1} of ${data.gallery.length}"></button>`).join('')
+                : '';
+        }
+
+        // Delegated once — the dots are rebuilt on every open
+        const galleryTrack = document.getElementById('modalGallery');
+        const galleryDots = document.getElementById('modalGalleryDots');
+
+        if (galleryTrack && galleryDots) {
+            /* Slide pitch is measured from the rendered children — mobile shows
+               a narrower "peeking" slide than desktop, so clientWidth would drift. */
+            function slideStep() {
+                const slides = galleryTrack.querySelectorAll('img');
+                if (slides.length > 1) {
+                    return slides[1].offsetLeft - slides[0].offsetLeft;
+                }
+                return galleryTrack.clientWidth || 1;
+            }
+
+            galleryDots.addEventListener('click', (e) => {
+                const dot = e.target.closest('.gallery-dot');
+                if (!dot) return;
+                galleryTrack.scrollTo({
+                    left: Number(dot.dataset.index) * slideStep(),
+                    behavior: prefersReducedMotion.matches ? 'auto' : 'smooth'
+                });
+            });
+
+            let scrollTick = false;
+            galleryTrack.addEventListener('scroll', () => {
+                if (scrollTick) return;
+                scrollTick = true;
+                window.requestAnimationFrame(() => {
+                    const index = Math.round(galleryTrack.scrollLeft / slideStep());
+                    galleryDots.querySelectorAll('.gallery-dot').forEach((dot, i) => {
+                        dot.classList.toggle('active', i === index);
+                    });
+                    scrollTick = false;
+                });
+            }, { passive: true });
         }
 
         propertyCards.forEach(card => {
@@ -418,6 +542,9 @@
 
         function runCounter() {
             statNumbers.forEach(numEl => {
+                // Non-integer figures (a 5.0 rating) are shown as-is
+                if (numEl.hasAttribute('data-static')) return;
+
                 const targetStr = numEl.dataset.target || numEl.textContent.trim();
                 const suffix = numEl.textContent.replace(/[\d\s]/g, '');
                 const targetNum = parseInt(targetStr.replace(/\D/g, ''), 10);
@@ -576,7 +703,45 @@
         update();
     }
 
-    /* 8. Global dismiss shortcut */
+    /* 8. Brand mark
+     * The badge lives at assets/logo.png. Until that file exists every
+     * <img data-logo> is dropped so the page falls back to the wordmark
+     * instead of showing broken-image icons. Once it's added:
+     *   data-logo="pair"    — badge sits beside the wordmark (header, footer)
+     *   data-logo="replace" — badge takes the place of the "EE" lettering
+     */
+    function initBrandMark() {
+        document.querySelectorAll('img[data-logo]').forEach(img => {
+            const fallback = img.parentElement
+                ? img.parentElement.querySelector('[data-logo-fallback]')
+                : null;
+
+            function onLoaded() {
+                if (img.dataset.logo === 'replace' && fallback) {
+                    fallback.hidden = true;
+                }
+            }
+
+            function onFailed() {
+                img.remove();
+            }
+
+            if (img.complete) {
+                // Already settled before this script ran
+                if (img.naturalWidth > 0) {
+                    onLoaded();
+                } else {
+                    onFailed();
+                }
+                return;
+            }
+
+            img.addEventListener('load', onLoaded);
+            img.addEventListener('error', onFailed);
+        });
+    }
+
+    /* 9. Global dismiss shortcut */
     function initGlobalKeys() {
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' || e.key === 'Esc') {
@@ -594,6 +759,7 @@
         initBookingModal();
         initSmoothScroll();
         initMobileCtaBar();
+        initBrandMark();
         initGlobalKeys();
     });
 })();

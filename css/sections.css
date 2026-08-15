@@ -201,6 +201,14 @@
     margin-bottom: 1.2rem;
 }
 
+/* Brand badge replaces the "EE" lettering once assets/logo.png exists */
+.monogram-mark {
+    width: clamp(110px, 30vw, 150px);
+    height: auto;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+
 .story-visual .tagline {
     font-family: var(--font-sans);
     font-size: 0.85rem;
@@ -282,28 +290,82 @@
 }
 
 .property-card-body .years {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--color-gold);
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.5rem;
 }
 
 .property-card-body h3 {
     font-family: var(--font-serif);
-    font-size: 1.6rem;
+    font-size: 1.75rem;
     font-weight: 600;
     color: var(--color-charcoal);
-    margin-bottom: 0.8rem;
-    line-height: 1.25;
+    margin-bottom: 0.15rem;
+    line-height: 1.2;
+}
+
+/* Listing name sits under the house name */
+.property-card-body .property-subtitle {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-muted);
+    margin-bottom: 0.85rem;
 }
 
 .property-card-body p {
     font-size: 0.95rem;
     color: var(--color-gray);
     line-height: 1.7;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.1rem;
+}
+
+/* Rating pill over the photo — mirrors the listing sheet badges */
+.property-rating {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: var(--border-radius-full);
+    background: rgba(20, 18, 16, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: var(--color-cream);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+
+.property-rating span {
+    color: var(--color-gold-light);
+}
+
+/* Guests / bedrooms / beds */
+.property-specs {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.3rem;
+}
+
+.property-specs li {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--color-charcoal-muted);
+    background: var(--color-gray-pale);
+    border-radius: var(--border-radius-full);
+    padding: 0.32rem 0.75rem;
 }
 
 .property-card-footer {
@@ -313,9 +375,36 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 0.75rem;
     font-size: 0.8rem;
     font-weight: 600;
     color: var(--color-charcoal);
+}
+
+.property-price {
+    font-size: 0.78rem;
+    color: var(--color-gray);
+    font-weight: 500;
+}
+
+.property-price strong {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-charcoal);
+    margin-right: 0.15rem;
+}
+
+.property-price-tba {
+    font-style: italic;
+}
+
+.property-more {
+    flex-shrink: 0;
+    color: var(--color-gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
 }
 
 /* Brand Promise Section */
