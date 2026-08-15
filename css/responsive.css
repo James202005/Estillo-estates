@@ -271,6 +271,12 @@
         display: none;
     }
 
+    /* The eyebrow's natural width (~380px) exceeds the content area on a
+       true 375-390px phone, so drop the location clause to stay one line */
+    .hero-eyebrow-location {
+        display: none;
+    }
+
     .hero-subtitle {
         margin: 1.4rem auto 2rem;
     }
