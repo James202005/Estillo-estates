@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Estillo Estates — Iloilo's Entire Home &amp; Transient Stay Collection</title>
     <meta name="description" content="Estillo Estates is Iloilo's entire home and transient stay collection. Experience the comfort of a home—not just a place to sleep. Book directly with us: 0961 808 1487.">
+    <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#faf7f2">
     <meta name="format-detection" content="telephone=no">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <!-- SITE_URL: update every absolute URL below (canonical, OG, Twitter, JSON-LD,
+         robots.txt, sitemap.xml) once the Netlify site name or custom domain is final. -->
+    <link rel="canonical" href="https://estilloestates.netlify.app/">
 
     <!-- Brand icons -->
     <link rel="icon" href="assets/logo-192.png" type="image/png" sizes="192x192">
@@ -19,7 +24,94 @@
     <meta property="og:title" content="Estillo Estates — Iloilo's Entire Home &amp; Transient Stay Collection">
     <meta property="og:description" content="Experience the comfort of a home—not just a place to sleep. Two 5.0-rated stays in Oton, Iloilo. Book directly with us.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="assets/logo.png">
+    <meta property="og:url" content="https://estilloestates.netlify.app/">
+    <meta property="og:site_name" content="Estillo Estates">
+    <meta property="og:locale" content="en_PH">
+    <meta property="og:image" content="https://estilloestates.netlify.app/assets/logo.png">
+    <meta property="og:image:width" content="400">
+    <meta property="og:image:height" content="400">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Estillo Estates — Iloilo's Entire Home &amp; Transient Stay Collection">
+    <meta name="twitter:description" content="Experience the comfort of a home—not just a place to sleep. Two 5.0-rated stays in Oton, Iloilo. Book directly with us.">
+    <meta name="twitter:image" content="https://estilloestates.netlify.app/assets/logo.png">
+
+    <!-- Structured data: tells Google this is a real hospitality brand with two
+         bookable, guest-rated properties — not just a page of text. No ratingCount
+         or address is included below because none is publicly verifiable yet;
+         fabricating either would violate Google's structured-data guidelines. -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://estilloestates.netlify.app/#organization",
+                "name": "Estillo Estates",
+                "url": "https://estilloestates.netlify.app/",
+                "logo": "https://estilloestates.netlify.app/assets/logo.png",
+                "image": "https://estilloestates.netlify.app/assets/logo.png",
+                "description": "Estillo Estates is a growing hospitality and property development brand in Iloilo, Philippines, offering an entire home and transient stay collection built around thoughtful design and genuine hospitality.",
+                "telephone": "+63-961-808-1487",
+                "areaServed": {
+                    "@type": "City",
+                    "name": "Oton, Iloilo"
+                },
+                "sameAs": [
+                    "https://www.facebook.com/profile.php?id=61573081126916",
+                    "https://www.instagram.com/semi.industrialcozyhome"
+                ]
+            },
+            {
+                "@type": "LodgingBusiness",
+                "@id": "https://estilloestates.netlify.app/#lumina",
+                "name": "Lumina — Semi-Industrial Cozy Home",
+                "brand": { "@id": "https://estilloestates.netlify.app/#organization" },
+                "description": "A hotel-clean, thoughtfully designed entire home in Oton, Iloilo wrapped around a garden courtyard, built for comfortable stays and relaxed gatherings.",
+                "image": "https://estilloestates.netlify.app/assets/properties/lumina-garden-lg.webp",
+                "url": "https://www.airbnb.com/rooms/1591042140564793687",
+                "telephone": "+63-961-808-1487",
+                "priceRange": "₱2,500 per night",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Oton",
+                    "addressRegion": "Iloilo",
+                    "addressCountry": "PH"
+                },
+                "amenityFeature": [
+                    { "@type": "LocationFeatureSpecification", "name": "Fast WiFi + Netflix" },
+                    { "@type": "LocationFeatureSpecification", "name": "Full kitchen" },
+                    { "@type": "LocationFeatureSpecification", "name": "Garden swing + outdoor dining" },
+                    { "@type": "LocationFeatureSpecification", "name": "Free parking" }
+                ]
+            },
+            {
+                "@type": "LodgingBusiness",
+                "@id": "https://estilloestates.netlify.app/#savannah",
+                "name": "Savannah — Soak | Screen Urban Hideaway",
+                "brand": { "@id": "https://estilloestates.netlify.app/#organization" },
+                "description": "A private cinema-and-pool staycation house in Oton, Iloilo with open-air movie nights over the water and room for the whole barkada.",
+                "image": "https://estilloestates.netlify.app/assets/properties/savannah-cinema-lg.webp",
+                "url": "https://www.airbnb.com/rooms/1330278337522141292",
+                "telephone": "+63-961-808-1487",
+                "priceRange": "₱4,699 per night",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Oton",
+                    "addressRegion": "Iloilo",
+                    "addressCountry": "PH"
+                },
+                "amenityFeature": [
+                    { "@type": "LocationFeatureSpecification", "name": "Private swimming pool" },
+                    { "@type": "LocationFeatureSpecification", "name": "Outdoor BBQ + dining area" },
+                    { "@type": "LocationFeatureSpecification", "name": "Screen / movie area" },
+                    { "@type": "LocationFeatureSpecification", "name": "AC in all bedrooms + living room" }
+                ]
+            }
+        ]
+    }
+    </script>
 
     <!-- Hero is the LCP element; preload the crop this viewport will actually use -->
     <link rel="preload" as="image" href="assets/hero-mobile.webp" media="(max-width: 768px)" fetchpriority="high">
@@ -32,7 +124,7 @@
 
     <!-- Master CSS Design System Bundle. Bump ?v= here and in styles.css
          after editing CSS so browsers don't serve a stale copy. -->
-    <link rel="stylesheet" href="css/styles.css?v=3">
+    <link rel="stylesheet" href="css/styles.css?v=4">
 </head>
 <body>
 
@@ -184,9 +276,9 @@
 
             <!-- Category Filter Tabs -->
             <div class="portfolio-filters reveal reveal-delay-1" role="group" aria-label="Filter properties">
-                <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">All Projects</button>
-                <button class="filter-btn" type="button" data-filter="live" aria-pressed="false">Live Stays</button>
+                <button class="filter-btn active" type="button" data-filter="live" aria-pressed="true">Live Stays</button>
                 <button class="filter-btn" type="button" data-filter="upcoming" aria-pressed="false">Upcoming</button>
+                <button class="filter-btn" type="button" data-filter="all" aria-pressed="false">All Projects</button>
             </div>
 
             <div class="portfolio-grid">
@@ -194,7 +286,7 @@
                 <article class="property-card reveal reveal-delay-1" data-category="live" data-property-id="lumina"
                      role="button" tabindex="0" aria-label="View details for Lumina, Semi-Industrial Cozy Home">
                     <div class="property-card-image">
-                        <span class="property-badge live">Live</span>
+                        <span class="property-badge live">Book Now</span>
                         <img src="assets/properties/lumina-garden.webp"
                              srcset="assets/properties/lumina-garden.webp 800w, assets/properties/lumina-garden-lg.webp 1400w"
                              sizes="(max-width: 768px) 100vw, 380px"
@@ -226,7 +318,7 @@
                 <article class="property-card reveal reveal-delay-2" data-category="live" data-property-id="savannah"
                      role="button" tabindex="0" aria-label="View details for Savannah, Soak and Screen Urban Hideaway">
                     <div class="property-card-image">
-                        <span class="property-badge live">Live</span>
+                        <span class="property-badge live">Book Now</span>
                         <img src="assets/properties/savannah-cinema.webp"
                              srcset="assets/properties/savannah-cinema.webp 800w, assets/properties/savannah-cinema-lg.webp 1400w"
                              sizes="(max-width: 768px) 100vw, 380px"
@@ -579,6 +671,6 @@
     </div>
 
     <!-- Application JavaScript Entry Point -->
-    <script src="js/main.js?v=3"></script>
+    <script src="js/main.js?v=4"></script>
 </body>
 </html>

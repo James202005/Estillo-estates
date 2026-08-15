@@ -83,7 +83,7 @@
                 ['eis-concept', 'Estillo Industrial Suites architectural concept rendering']
             ],
             description: 'A flagship hospitality concept envisioned to unite designer accommodations, artisanal café culture, and curated lifestyle retail spaces. EIS marks the expansion of Estillo Estates into full-scale hospitality destinations.',
-            amenities: ['Artisanal Cafe & Bakery', 'Boutique Luxury Suites', 'Co-Working Lounge', 'Wellness & Sauna Deck', 'Design Concept Store', '24/7 Hospitality Concierge'],
+            amenities: [ 'Boutique Luxury Suites', 'Co-Working Lounge', 'Wellness & Sauna Deck', 'Design Concept Store'],
             quote: null
         }
     };
@@ -331,6 +331,40 @@
         const modalCloseBtn = document.getElementById('modalCloseBtn');
         const hideTimers = new WeakMap();
 
+        function applyFilter(filterValue, animate) {
+            propertyCards.forEach(card => {
+                // Cancel any pending hide so fast repeated taps can't
+                // leave a matching card stuck at display:none
+                window.clearTimeout(hideTimers.get(card));
+
+                const matches = filterValue === 'all' || card.dataset.category === filterValue;
+
+                if (matches) {
+                    card.style.display = 'flex';
+                    card.removeAttribute('aria-hidden');
+                    if (animate) {
+                        hideTimers.set(card, window.setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 20));
+                    } else {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }
+                } else if (animate) {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(10px)';
+                    card.setAttribute('aria-hidden', 'true');
+                    hideTimers.set(card, window.setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300));
+                } else {
+                    card.style.display = 'none';
+                    card.setAttribute('aria-hidden', 'true');
+                }
+            });
+        }
+
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => {
@@ -340,33 +374,17 @@
                 btn.classList.add('active');
                 btn.setAttribute('aria-pressed', 'true');
 
-                const filterValue = btn.dataset.filter;
-
-                propertyCards.forEach(card => {
-                    // Cancel any pending hide so fast repeated taps can't
-                    // leave a matching card stuck at display:none
-                    window.clearTimeout(hideTimers.get(card));
-
-                    const matches = filterValue === 'all' || card.dataset.category === filterValue;
-
-                    if (matches) {
-                        card.style.display = 'flex';
-                        card.removeAttribute('aria-hidden');
-                        hideTimers.set(card, window.setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
-                        }, 20));
-                    } else {
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(10px)';
-                        card.setAttribute('aria-hidden', 'true');
-                        hideTimers.set(card, window.setTimeout(() => {
-                            card.style.display = 'none';
-                        }, 300));
-                    }
-                });
+                applyFilter(btn.dataset.filter, true);
             });
         });
+
+        // The HTML marks one tab active by default (Live Stays); apply that
+        // same filter on load instead of leaving every card visible until
+        // the first click.
+        const initialBtn = document.querySelector('.filter-btn.active') || filterBtns[0];
+        if (initialBtn) {
+            applyFilter(initialBtn.dataset.filter, false);
+        }
 
         if (!modalOverlay) return;
 

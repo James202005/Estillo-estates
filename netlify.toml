@@ -1,0 +1,19 @@
+[build]
+  publish = "."
+
+# Property photos keep their filename when re-cropped, so a short cache
+# avoids serving a stale image after a swap like the hero photo change.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"

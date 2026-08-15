@@ -337,28 +337,29 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     min-height: var(--tap-target);
-    padding: 0.65rem 1.4rem;
-    border-radius: var(--border-radius-full);
-    border: 1px solid var(--color-border);
-    background: var(--color-white);
+    padding: 0.75rem 1.2rem;
+    border: none;
+    border-bottom: 3px solid transparent;
+    background: transparent;
     color: var(--color-gray);
     cursor: pointer;
     transition: var(--transition-fast);
 }
 
 .filter-btn.active {
-    background: var(--color-charcoal);
-    color: var(--color-cream);
-    border-color: var(--color-charcoal);
-    box-shadow: var(--shadow-sm);
+    color: var(--color-charcoal);
+    border-bottom-color: var(--color-charcoal);
+    background: transparent;
 }
 
 @media (hover: hover) and (pointer: fine) {
     .filter-btn:hover {
-        background: var(--color-charcoal);
-        color: var(--color-cream);
-        border-color: var(--color-charcoal);
-        box-shadow: var(--shadow-sm);
+        color: var(--color-charcoal);
+        border-bottom-color: var(--color-gold);
+    }
+
+    .filter-btn.active:hover {
+        border-bottom-color: var(--color-charcoal);
     }
 }
 
