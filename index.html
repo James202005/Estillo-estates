@@ -124,7 +124,7 @@
 
     <!-- Master CSS Design System Bundle. Bump ?v= here and in styles.css
          after editing CSS so browsers don't serve a stale copy. -->
-    <link rel="stylesheet" href="css/styles.css?v=5">
+    <link rel="stylesheet" href="css/styles.css?v=7">
 </head>
 <body>
 
@@ -298,8 +298,7 @@
                     </div>
                     <div class="property-card-body">
                         <span class="years">Oton, Iloilo · 2025 — Present</span>
-                        <h3>Lumina</h3>
-                        <p class="property-subtitle">Semi-Industrial Cozy Home</p>
+                        <h3>Semi-Industrial Cozy Home</h3>
                         <p>
                             A warm, hotel-clean home wrapped around a garden courtyard — built for
                             comfortable stays, relaxed gatherings, and slow mornings.
@@ -330,8 +329,7 @@
                     </div>
                     <div class="property-card-body">
                         <span class="years">Oton, Iloilo · 2025 — Present</span>
-                        <h3>Savannah</h3>
-                        <p class="property-subtitle">Soak | Screen Urban Hideaway</p>
+                        <h3>Soak | Screen Urban Hideaway</h3>
                         <p>
                             A private cinema-and-pool staycation house — open-air movie nights over
                             the water, long shared dinners, and room for the whole barkada.
@@ -608,7 +606,10 @@
 
                 <div class="modal-actions">
                     <div class="modal-rate" id="modalPropRate"></div>
-                    <a class="btn btn-primary btn-block" id="modalPropBook" href="#" target="_blank" rel="noopener noreferrer">Book on Airbnb</a>
+                    <div class="modal-book-row" id="modalBookRow">
+                        <a class="btn btn-primary" id="modalPropBookAirbnb" href="#" target="_blank" rel="noopener noreferrer">Airbnb</a>
+                        <a class="btn btn-primary" id="modalPropBookBooking" href="#" target="_blank" rel="noopener noreferrer">Booking.com</a>
+                    </div>
                     <button type="button" class="btn btn-secondary btn-block open-booking-modal" id="modalPropContact">Other ways to book</button>
                 </div>
             </div>
@@ -624,36 +625,39 @@
                 <span class="section-label">Get In Touch</span>
                 <h2 class="modal-title" id="bookingModalTitle">Book Your Stay</h2>
                 <p class="modal-desc modal-desc-tight">
-                    Both homes are booked through Airbnb — tap a stay to see live dates,
-                    reviews and instant booking. Prefer to talk first? Message us directly.
+                    Both homes are bookable on Airbnb or Booking.com — pick your
+                    platform to see live dates, reviews and instant booking. Prefer to
+                    talk first? Message us directly.
                 </p>
 
                 <ul class="booking-options">
                     <li>
-                        <a class="booking-option" data-property="lumina"
-                           href="https://www.airbnb.com/rooms/1591042140564793687"
-                           target="_blank" rel="noopener noreferrer">
+                        <div class="booking-option" data-property="lumina">
                             <img src="assets/properties/lumina-thumb.webp" alt="" width="74" height="74" decoding="async">
                             <span class="booking-option-body">
                                 <span class="booking-option-name">Lumina</span>
                                 <span class="booking-option-sub">Semi-Industrial Cozy Home · 6 guests</span>
                                 <span class="booking-option-rate">₱2,500 <span>/ night</span></span>
+                                <span class="booking-option-platforms">
+                                    <a href="https://www.airbnb.com/rooms/1591042140564793687" target="_blank" rel="noopener noreferrer">Airbnb</a>
+                                    <a href="https://www.booking.com/Pulse-hT09gx" target="_blank" rel="noopener noreferrer">Booking.com</a>
+                                </span>
                             </span>
-                            <span class="booking-option-go" aria-hidden="true">→</span>
-                        </a>
+                        </div>
                     </li>
                     <li>
-                        <a class="booking-option" data-property="savannah"
-                           href="https://www.airbnb.com/rooms/1330278337522141292"
-                           target="_blank" rel="noopener noreferrer">
+                        <div class="booking-option" data-property="savannah">
                             <img src="assets/properties/savannah-thumb.webp" alt="" width="74" height="74" decoding="async">
                             <span class="booking-option-body">
                                 <span class="booking-option-name">Savannah</span>
                                 <span class="booking-option-sub">Soak | Screen Hideaway · 9 guests</span>
                                 <span class="booking-option-rate">₱4,699 <span>/ night</span></span>
+                                <span class="booking-option-platforms">
+                                    <a href="https://www.airbnb.com/rooms/1330278337522141292" target="_blank" rel="noopener noreferrer">Airbnb</a>
+                                    <a href="https://www.booking.com/Pulse-aFRwUF" target="_blank" rel="noopener noreferrer">Booking.com</a>
+                                </span>
                             </span>
-                            <span class="booking-option-go" aria-hidden="true">→</span>
-                        </a>
+                        </div>
                     </li>
                 </ul>
 
@@ -673,6 +677,6 @@
     </div>
 
     <!-- Application JavaScript Entry Point -->
-    <script src="js/main.js?v=5"></script>
+    <script src="js/main.js?v=6"></script>
 </body>
 </html>

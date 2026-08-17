@@ -710,6 +710,25 @@
     gap: 0.85rem;
 }
 
+/* Both booking platforms get equal footing — no extra tap to reach either */
+.modal-book-row {
+    display: flex;
+    gap: 0.7rem;
+}
+
+.modal-book-row .btn {
+    flex: 1;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+}
+
+@media (max-width: 380px) {
+    /* Two full-width buttons won't both fit a label on the narrowest phones */
+    .modal-book-row {
+        flex-direction: column;
+    }
+}
+
 /* Booking options — one row per Airbnb listing */
 .booking-options {
     list-style: none;
@@ -728,6 +747,42 @@
     border-radius: var(--border-radius-md);
     background: var(--color-white);
     transition: var(--transition-fast);
+}
+
+/* Two platform links per stay — Airbnb and Booking.com side by side */
+.booking-option-platforms {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.booking-option-platforms a {
+    flex: 1;
+    text-align: center;
+    min-height: 2.15rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--color-charcoal);
+    transition: var(--transition-fast);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .booking-option-platforms a:hover {
+        background: var(--color-charcoal);
+        border-color: var(--color-charcoal);
+        color: var(--color-cream);
+    }
+}
+
+.booking-option-platforms a:active {
+    transform: scale(0.97);
 }
 
 .booking-option img {
@@ -772,29 +827,10 @@
     color: var(--color-gray);
 }
 
-.booking-option-go {
-    flex-shrink: 0;
-    color: var(--color-gold);
-    font-size: 1.1rem;
-    padding-right: 0.3rem;
-}
-
 /* Marks the stay the guest was just viewing */
 .booking-option.highlighted {
     border-color: var(--color-gold);
     box-shadow: 0 0 0 3px rgba(184, 151, 90, 0.15);
-}
-
-.booking-option:active {
-    transform: scale(0.99);
-}
-
-@media (hover: hover) and (pointer: fine) {
-    .booking-option:hover {
-        border-color: var(--color-gold-light);
-        box-shadow: var(--shadow-md);
-        transform: translateY(-2px);
-    }
 }
 
 /* Direct-contact block under the listings */

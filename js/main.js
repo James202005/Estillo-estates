@@ -27,6 +27,7 @@
             rate: '₱2,500',
             rating: '5.0 · Guest favorite · Top 5% of homes',
             airbnb: 'https://www.airbnb.com/rooms/1591042140564793687',
+            booking: 'https://www.booking.com/Pulse-hT09gx',
             tagline: 'Warm design meets semi-industrial calm.',
             specs: ['6 guests', '2 bedrooms', '3 beds', 'Entire home'],
             gallery: [
@@ -52,6 +53,7 @@
             rate: '₱4,699',
             rating: '5.0 · Guest favorite · Top 5% of homes',
             airbnb: 'https://www.airbnb.com/rooms/1330278337522141292',
+            booking: 'https://www.booking.com/Pulse-aFRwUF',
             tagline: 'Private cinema pool staycation.',
             specs: ['9 guests', '4 bedrooms', '5 beds', 'Entire home'],
             gallery: [
@@ -77,6 +79,7 @@
             rate: '',
             rating: '',
             airbnb: '',
+            booking: '',
             tagline: 'Boutique accommodations meets café culture.',
             specs: ['Boutique suites', 'Café', 'Lifestyle spaces'],
             gallery: [
@@ -438,19 +441,26 @@
                     : `<span>${data.years}</span>`;
             }
 
-            /* Live stays book on Airbnb; the unbuilt EIS has no listing,
+            /* Live stays book on Airbnb or Booking.com, shown side by side so
+               neither takes an extra tap; the unbuilt EIS has no listing yet,
                so it only offers the direct-contact sheet. */
-            const bookBtn = document.getElementById('modalPropBook');
+            const bookRow = document.getElementById('modalBookRow');
+            const airbnbBtn = document.getElementById('modalPropBookAirbnb');
+            const bookingBtn = document.getElementById('modalPropBookBooking');
             const contactBtn = document.getElementById('modalPropContact');
-            if (bookBtn) {
-                bookBtn.hidden = !data.airbnb;
-                if (data.airbnb) {
-                    bookBtn.href = data.airbnb;
-                    bookBtn.textContent = `Book ${data.title} on Airbnb`;
-                }
+            if (bookRow) {
+                bookRow.hidden = !data.airbnb && !data.booking;
+            }
+            if (airbnbBtn) {
+                airbnbBtn.hidden = !data.airbnb;
+                if (data.airbnb) airbnbBtn.href = data.airbnb;
+            }
+            if (bookingBtn) {
+                bookingBtn.hidden = !data.booking;
+                if (data.booking) bookingBtn.href = data.booking;
             }
             if (contactBtn) {
-                contactBtn.textContent = data.airbnb ? 'Other ways to book' : 'Talk to us about EIS';
+                contactBtn.textContent = (data.airbnb || data.booking) ? 'Other ways to book' : 'Talk to us about EIS';
             }
 
             buildGallery(data);
