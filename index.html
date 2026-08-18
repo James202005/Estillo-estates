@@ -120,11 +120,16 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Gives the property map embed a head start on its connection setup;
+         only helps if "Show map" is clicked within ~10s of load (browsers
+         close idle preconnects after that), but costs nothing otherwise -->
+    <link rel="preconnect" href="https://www.google.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Master CSS Design System Bundle. Bump ?v= here and in styles.css
          after editing CSS so browsers don't serve a stale copy. -->
-    <link rel="stylesheet" href="css/styles.css?v=10">
+    <link rel="stylesheet" href="css/styles.css?v=11">
 </head>
 <body>
 
@@ -601,9 +606,16 @@
                 </div>
                 <div class="modal-map" id="modalMapWrap" hidden>
                     <div class="modal-map-loading" id="modalMapLoading" aria-hidden="true">
-                        <span class="modal-map-spinner"></span> Loading map…
+                        <span class="modal-map-loading-row">
+                            <span class="modal-map-spinner"></span>
+                            <span id="modalMapLoadingText">Loading map…</span>
+                        </span>
+                        <a id="modalMapFallbackLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Open in Google Maps <span aria-hidden="true">↗</span></a>
                     </div>
-                    <iframe id="modalMapFrame" src="" loading="lazy"
+                    <!-- eager: the src is only ever set from a click handler (never on page
+                         load), so native lazy-loading would only add its own extra delay
+                         re-evaluating intersection right after the wrapper is unhidden -->
+                    <iframe id="modalMapFrame" src="" loading="eager"
                             title="Map showing the property location"
                             referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
@@ -693,6 +705,6 @@
     </div>
 
     <!-- Application JavaScript Entry Point -->
-    <script src="js/main.js?v=10"></script>
+    <script src="js/main.js?v=11"></script>
 </body>
 </html>

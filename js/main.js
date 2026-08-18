@@ -340,6 +340,9 @@
         const propertyCards = document.querySelectorAll('.property-card');
         const modalOverlay = document.getElementById('propertyModal');
         const modalCloseBtn = document.getElementById('modalCloseBtn');
+        // Shared between openProperty() and the map toggle so a pending
+        // "still loading?" fallback timer never fires against the wrong property
+        let mapLoadTimeoutId = null;
         const hideTimers = new WeakMap();
 
         function applyFilter(filterValue, animate) {
@@ -429,6 +432,7 @@
             const mapWrap = document.getElementById('modalMapWrap');
             const mapFrame = document.getElementById('modalMapFrame');
             const mapLoading = document.getElementById('modalMapLoading');
+            const mapFallback = document.getElementById('modalMapFallbackLink');
             const mapToggle = document.getElementById('modalAddressToggle');
             const directionsLink = document.getElementById('modalDirectionsLink');
             if (addressWrap && addressText) {
@@ -442,8 +446,10 @@
             }
             // Always reopen collapsed with the map unloaded, even if the
             // guest had it expanded on a different property last time
+            window.clearTimeout(mapLoadTimeoutId);
             if (mapWrap) mapWrap.hidden = true;
             if (mapFrame) mapFrame.src = '';
+            if (mapFallback) mapFallback.hidden = true;
             if (mapLoading) mapLoading.hidden = false;
             if (mapToggle) {
                 mapToggle.textContent = 'Show map';
@@ -592,6 +598,7 @@
         const mapWrapEl = document.getElementById('modalMapWrap');
         const mapFrameEl = document.getElementById('modalMapFrame');
         const mapLoadingEl = document.getElementById('modalMapLoading');
+        const mapFallbackEl = document.getElementById('modalMapFallbackLink');
         if (mapToggleBtn && mapWrapEl && mapFrameEl) {
             mapToggleBtn.addEventListener('click', () => {
                 const expanded = mapToggleBtn.getAttribute('aria-expanded') === 'true';
@@ -611,8 +618,20 @@
                         // 'load' only fires once per src change, so the spinner
                         // is wired here rather than on every show/hide toggle
                         mapFrameEl.addEventListener('load', () => {
+                            window.clearTimeout(mapLoadTimeoutId);
                             mapLoadingEl.hidden = true;
                         }, { once: true });
+
+                        // Ad blockers commonly target Google Maps iframes specifically,
+                        // which can leave 'load' never firing at all — give guests a
+                        // direct way out instead of an infinite spinner
+                        if (mapFallbackEl) {
+                            mapFallbackEl.hidden = true;
+                            mapFallbackEl.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapToggleBtn.dataset.query)}`;
+                            mapLoadTimeoutId = window.setTimeout(() => {
+                                mapFallbackEl.hidden = false;
+                            }, 6000);
+                        }
                     }
                     mapFrameEl.src = `https://www.google.com/maps?q=${encodeURIComponent(mapToggleBtn.dataset.query)}&output=embed`;
                 }
