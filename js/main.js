@@ -30,7 +30,9 @@
             airbnb: 'https://www.airbnb.com/rooms/1591042140564793687',
             booking: 'https://www.booking.com/Pulse-hT09gx',
             address: 'Semi-Industrial Cozy Home, Lumina Home Phase 3, Oton, Iloilo, 5020 Iloilo City, Philippines',
-            mapQuery: 'Lumina Home Phase 3, Oton, Iloilo, 5020 Iloilo City, Philippines',
+            // Exact pin coordinates (from the property's Google Maps share link) rather
+            // than a geocoded text address — guarantees the marker lands on the actual house
+            mapQuery: '10.7561443,122.4965648',
             tagline: 'Warm design meets semi-industrial calm.',
             specs: ['6 guests', '2 bedrooms', '3 beds', 'Entire home'],
             gallery: [
