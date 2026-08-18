@@ -270,11 +270,6 @@
         padding: 0.35rem 0.9rem;
     }
 
-    /* Keep the hero credit to a single line on small phones */
-    .hero-credit-more {
-        display: none;
-    }
-
     /* The eyebrow's natural width (~380px) exceeds the content area on a
        true 375-390px phone, so drop the location clause to stay one line */
     .hero-eyebrow-location {

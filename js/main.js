@@ -18,8 +18,8 @@
        changes. Gallery entries name the slug; -lg is appended for the sheet. */
     const propertiesData = {
         'lumina': {
-            // Modal leads with the listing style, not the house nickname
-            // ("Lumina" — still used in the footer, hero credit and booking sheet)
+            // The house nickname ("Lumina") isn't shown anywhere on the site —
+            // every surface leads with the listing name instead
             title: 'Semi-Industrial Cozy Home',
             category: 'live',
             years: '2025 — Present',
@@ -49,8 +49,8 @@
             quote: { text: 'The best house we’ve ever stayed in! Better than a hotel.', author: 'Ben' }
         },
         'savannah': {
-            // Modal leads with the listing style, not the house nickname
-            // ("Savannah" — still used in the footer, hero credit and booking sheet)
+            // The house nickname ("Savannah") isn't shown anywhere on the site —
+            // every surface leads with the listing name instead
             title: 'Soak | Screen Urban Hideaway',
             category: 'live',
             years: '2025 — Present',
