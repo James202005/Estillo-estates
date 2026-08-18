@@ -124,7 +124,7 @@
 
     <!-- Master CSS Design System Bundle. Bump ?v= here and in styles.css
          after editing CSS so browsers don't serve a stale copy. -->
-    <link rel="stylesheet" href="css/styles.css?v=7">
+    <link rel="stylesheet" href="css/styles.css?v=10">
 </head>
 <body>
 
@@ -202,7 +202,7 @@
                 built around thoughtful design, quality craftsmanship, and genuine hospitality.
             </p>
             <div class="hero-actions">
-                <a href="#portfolio" class="btn btn-primary">Explore Portfolio</a>
+                <a href="#portfolio" class="btn btn-primary">Property Portfolio</a>
                 <a href="#story" class="btn btn-secondary">Our Story</a>
             </div>
         </div>
@@ -271,7 +271,7 @@
                 <span class="section-label">Hospitality Portfolio</span>
                 <h2 class="section-title">Our Growing Collection</h2>
                 <p class="section-description">
-                    Two live stays in Oton, Iloilo — both rated 5.0 and recognised as Guest
+                    Two property stays in Oton, Iloilo — both rated 5.0 and recognised as Guest
                     Favorites — with a full hospitality destination now in development.
                 </p>
             </div>
@@ -592,6 +592,22 @@
 
                 <ul class="modal-specs" id="modalPropSpecs"></ul>
 
+                <div class="modal-address" id="modalAddressWrap" hidden>
+                    <span class="modal-address-text" id="modalPropAddress"></span>
+                    <div class="modal-address-actions">
+                        <a class="modal-address-link" id="modalDirectionsLink" href="#" target="_blank" rel="noopener noreferrer">Directions <span aria-hidden="true">→</span></a>
+                        <button type="button" class="modal-address-link modal-address-toggle" id="modalAddressToggle" aria-expanded="false" aria-controls="modalMapWrap">Show map</button>
+                    </div>
+                </div>
+                <div class="modal-map" id="modalMapWrap" hidden>
+                    <div class="modal-map-loading" id="modalMapLoading" aria-hidden="true">
+                        <span class="modal-map-spinner"></span> Loading map…
+                    </div>
+                    <iframe id="modalMapFrame" src="" loading="lazy"
+                            title="Map showing the property location"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
                 <p class="modal-desc" id="modalPropDesc">Property Description</p>
 
                 <div class="modal-amenities">
@@ -677,6 +693,6 @@
     </div>
 
     <!-- Application JavaScript Entry Point -->
-    <script src="js/main.js?v=6"></script>
+    <script src="js/main.js?v=10"></script>
 </body>
 </html>

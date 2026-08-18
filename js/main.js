@@ -18,8 +18,9 @@
        changes. Gallery entries name the slug; -lg is appended for the sheet. */
     const propertiesData = {
         'lumina': {
-            title: 'Lumina',
-            subtitle: 'Semi-Industrial Cozy Home',
+            // Modal leads with the listing style, not the house nickname
+            // ("Lumina" — still used in the footer, hero credit and booking sheet)
+            title: 'Semi-Industrial Cozy Home',
             category: 'live',
             years: '2025 — Present',
             location: 'Oton, Iloilo',
@@ -28,6 +29,8 @@
             rating: '5.0 · Guest favorite · Top 5% of homes',
             airbnb: 'https://www.airbnb.com/rooms/1591042140564793687',
             booking: 'https://www.booking.com/Pulse-hT09gx',
+            address: 'Semi-Industrial Cozy Home, Lumina Home Phase 3, Oton, Iloilo, 5020 Iloilo City, Philippines',
+            mapQuery: 'Lumina Home Phase 3, Oton, Iloilo, 5020 Iloilo City, Philippines',
             tagline: 'Warm design meets semi-industrial calm.',
             specs: ['6 guests', '2 bedrooms', '3 beds', 'Entire home'],
             gallery: [
@@ -44,8 +47,9 @@
             quote: { text: 'The best house we’ve ever stayed in! Better than a hotel.', author: 'Ben' }
         },
         'savannah': {
-            title: 'Savannah',
-            subtitle: 'Soak | Screen Urban Hideaway',
+            // Modal leads with the listing style, not the house nickname
+            // ("Savannah" — still used in the footer, hero credit and booking sheet)
+            title: 'Soak | Screen Urban Hideaway',
             category: 'live',
             years: '2025 — Present',
             location: 'Oton, Iloilo',
@@ -54,6 +58,8 @@
             rating: '5.0 · Guest favorite · Top 5% of homes',
             airbnb: 'https://www.airbnb.com/rooms/1330278337522141292',
             booking: 'https://www.booking.com/Pulse-aFRwUF',
+            address: 'PGW2+G94 Estilo S|S (Blk8, Lot2, Glen D), Cottonwood, Oton, Iloilo, 5020 Iloilo City, Philippines',
+            mapQuery: 'PGW2+G94 Oton, Iloilo, Philippines',
             tagline: 'Private cinema pool staycation.',
             specs: ['9 guests', '4 bedrooms', '5 beds', 'Entire home'],
             gallery: [
@@ -80,6 +86,8 @@
             rating: '',
             airbnb: '',
             booking: '',
+            address: '',
+            mapQuery: '',
             tagline: 'Boutique accommodations meets café culture.',
             specs: ['Boutique suites', 'Café', 'Lifestyle spaces'],
             gallery: [
@@ -416,6 +424,33 @@
                 specs.innerHTML = data.specs.map(s => `<li>${s}</li>`).join('');
             }
 
+            const addressWrap = document.getElementById('modalAddressWrap');
+            const addressText = document.getElementById('modalPropAddress');
+            const mapWrap = document.getElementById('modalMapWrap');
+            const mapFrame = document.getElementById('modalMapFrame');
+            const mapLoading = document.getElementById('modalMapLoading');
+            const mapToggle = document.getElementById('modalAddressToggle');
+            const directionsLink = document.getElementById('modalDirectionsLink');
+            if (addressWrap && addressText) {
+                addressWrap.hidden = !data.address;
+                addressText.textContent = data.address || '';
+            }
+            if (directionsLink) {
+                directionsLink.href = data.mapQuery
+                    ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(data.mapQuery)}`
+                    : '#';
+            }
+            // Always reopen collapsed with the map unloaded, even if the
+            // guest had it expanded on a different property last time
+            if (mapWrap) mapWrap.hidden = true;
+            if (mapFrame) mapFrame.src = '';
+            if (mapLoading) mapLoading.hidden = false;
+            if (mapToggle) {
+                mapToggle.textContent = 'Show map';
+                mapToggle.setAttribute('aria-expanded', 'false');
+                mapToggle.dataset.query = data.mapQuery || '';
+            }
+
             const amenitiesList = document.getElementById('modalPropAmenities');
             if (amenitiesList) {
                 amenitiesList.innerHTML = data.amenities
@@ -551,6 +586,40 @@
 
         if (modalCloseBtn) {
             modalCloseBtn.addEventListener('click', () => layers.close(propertyLayer));
+        }
+
+        const mapToggleBtn = document.getElementById('modalAddressToggle');
+        const mapWrapEl = document.getElementById('modalMapWrap');
+        const mapFrameEl = document.getElementById('modalMapFrame');
+        const mapLoadingEl = document.getElementById('modalMapLoading');
+        if (mapToggleBtn && mapWrapEl && mapFrameEl) {
+            mapToggleBtn.addEventListener('click', () => {
+                const expanded = mapToggleBtn.getAttribute('aria-expanded') === 'true';
+                if (expanded) {
+                    mapWrapEl.hidden = true;
+                    mapToggleBtn.setAttribute('aria-expanded', 'false');
+                    mapToggleBtn.textContent = 'Show map';
+                    return;
+                }
+                // Fetch the embed on first expand only — no point loading a
+                // map iframe for guests who never ask to see one.
+                // (iframe.src always resolves to an absolute URL, even when
+                // the attribute is "", so check the raw attribute instead.)
+                if (!mapFrameEl.getAttribute('src') && mapToggleBtn.dataset.query) {
+                    if (mapLoadingEl) {
+                        mapLoadingEl.hidden = false;
+                        // 'load' only fires once per src change, so the spinner
+                        // is wired here rather than on every show/hide toggle
+                        mapFrameEl.addEventListener('load', () => {
+                            mapLoadingEl.hidden = true;
+                        }, { once: true });
+                    }
+                    mapFrameEl.src = `https://www.google.com/maps?q=${encodeURIComponent(mapToggleBtn.dataset.query)}&output=embed`;
+                }
+                mapWrapEl.hidden = false;
+                mapToggleBtn.setAttribute('aria-expanded', 'true');
+                mapToggleBtn.textContent = 'Hide map';
+            });
         }
 
         modalOverlay.addEventListener('click', (e) => {
