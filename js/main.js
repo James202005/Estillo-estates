@@ -37,11 +37,25 @@
             specs: ['6 guests', '2 bedrooms', '3 beds', 'Entire home'],
             gallery: [
                 ['lumina-garden', 'Garden lounge with hanging swing chairs at night'],
+                ['lumina-facade', 'House facade and gated entrance in daylight'],
                 ['lumina-living', 'Common area with sofa, staircase and layered rug'],
                 ['lumina-dining', 'Dining area beside the open kitchen'],
+                ['lumina-dining-nook', 'Dining nook beneath pendant lighting'],
+                ['lumina-kitchen', 'Kitchen counter styled with hanging plants'],
+                ['lumina-kitchen-bar', 'Kitchen bar with mounted TV and stone backsplash'],
                 ['lumina-lounge', 'Entertainment lounge with wall-mounted screen'],
+                ['lumina-lounge-hex', 'Lounge corner with hexagonal wall art'],
+                ['lumina-lounge-alt', 'Lounge with wall-mounted screen, evening view'],
+                ['lumina-styling', 'Dried flower styling detail near the entryway'],
                 ['lumina-bedroom', 'Bedroom with natural light and workspace'],
+                ['lumina-bedroom-loft', 'Second bedroom with striped curtains in morning light'],
+                ['lumina-bedroom-suite', 'Bedroom with crisp white bedding and workspace'],
+                ['lumina-bedroom-art', 'Bedroom with patterned throw and framed art'],
+                ['lumina-swing-nook', 'Reading nook beside the garden swing'],
+                ['lumina-grill', 'Patio grill and lounge seating with string lights'],
                 ['lumina-patio', 'Outdoor patio and BBQ area after dark'],
+                ['lumina-nightsnack', 'Outdoor table set for evening snacks and drinks'],
+                ['lumina-spread', 'Table spread with drinks and pulutan'],
                 ['lumina-exterior', 'Front exterior and garden walkway']
             ],
             description: 'Book the entire home in Oton, Iloilo. A hotel-clean, thoughtfully designed house built for comfortable stays, relaxed family gatherings and intimate celebrations — with a garden swing, outdoor dining and a full kitchen you can actually cook in.',
@@ -51,7 +65,7 @@
         'savannah': {
             // The house nickname ("Savannah") isn't shown anywhere on the site —
             // every surface leads with the listing name instead
-            title: 'Soak | Screen Urban Hideaway',
+            title: 'Soak|Screen Urban Hideaway',
             category: 'live',
             years: '2025 — Present',
             location: 'Oton, Iloilo',
@@ -66,11 +80,28 @@
             specs: ['9 guests', '4 bedrooms', '5 beds', 'Entire home'],
             gallery: [
                 ['savannah-cinema', 'Outdoor cinema screen reflected in the pool at night'],
+                ['savannah-cinema-wide', 'Outdoor cinema screen framed by garden greenery'],
+                ['savannah-cinema-plants', 'Cinema screen framed by tropical plants'],
                 ['savannah-pool', 'Private swimming pool framed by bamboo screening'],
+                ['savannah-pool-day', 'Private pool in daylight with garden view'],
+                ['savannah-pool-reflect', 'Pool deck reflections at night'],
+                ['savannah-poolnight', 'Pool deck lit for evening swims'],
+                ['savannah-entrance', 'Entrance nook with potted plants'],
+                ['savannah-walkway', 'Covered walkway beside the parking area'],
+                ['savannah-hallway', 'Hallway and living space with soft lighting'],
+                ['savannah-living', 'Living room with woven furniture and dining table'],
+                ['savannah-living-bright', 'Bright living and dining area with natural light'],
                 ['savannah-dining', 'Long communal dining table under the vaulted roof'],
+                ['savannah-dining-room', 'Indoor dining area with pendant light'],
+                ['savannah-dining-day', 'Long dining table under the covered patio in daylight'],
+                ['savannah-dining-night', 'Covered dining table lit for an evening gathering'],
+                ['savannah-covered-dining', 'Covered outdoor dining area under the vaulted roof'],
+                ['savannah-lounge-seat', 'Covered lounge seating area at night'],
+                ['savannah-feast', 'Outdoor table spread with a home-cooked feast'],
                 ['savannah-kitchen', 'Kitchen island set for a shared dinner'],
                 ['savannah-bedroom', 'Bedroom with gallery wall and tall windows'],
-                ['savannah-poolnight', 'Pool deck lit for evening swims'],
+                ['savannah-bedroom-mirror', 'Bedroom with patterned wallpaper and full-length mirror'],
+                ['savannah-bedroom-dresser', 'Bedroom dresser with framed art and mirror'],
                 ['savannah-exterior', 'Poolside exterior in daylight']
             ],
             description: 'A private retreat built around relaxation, outdoor entertainment and shared moments. Swim in the private pool, watch films projected open-air over the water, then gather everyone around the long kitchen island for dinner.',
@@ -535,13 +566,21 @@
             track.scrollLeft = 0;
 
             if (!dots) return;
-            const multiple = data.gallery.length > 1;
-            dots.hidden = !multiple;
-            dots.innerHTML = multiple
-                ? data.gallery.map((_, i) =>
+            const count = data.gallery.length;
+            dots.hidden = count <= 1;
+            // A dot per photo stops being usable well past a handful — a big
+            // gallery (guests get every room now, not a curated seven) falls
+            // back to a plain counter instead of dozens of 26px targets
+            dots.classList.toggle('gallery-dots-counter', count > 8);
+            if (count <= 1) {
+                dots.innerHTML = '';
+            } else if (count > 8) {
+                dots.innerHTML = `<span id="modalGalleryCounter">1 / ${count}</span>`;
+            } else {
+                dots.innerHTML = data.gallery.map((_, i) =>
                     `<button type="button" class="gallery-dot${i === 0 ? ' active' : ''}" data-index="${i}"
-                             aria-label="Go to photo ${i + 1} of ${data.gallery.length}"></button>`).join('')
-                : '';
+                             aria-label="Go to photo ${i + 1} of ${count}"></button>`).join('');
+            }
         }
 
         // Delegated once — the dots are rebuilt on every open
@@ -574,9 +613,15 @@
                 scrollTick = true;
                 window.requestAnimationFrame(() => {
                     const index = Math.round(galleryTrack.scrollLeft / slideStep());
-                    galleryDots.querySelectorAll('.gallery-dot').forEach((dot, i) => {
-                        dot.classList.toggle('active', i === index);
-                    });
+                    const counter = document.getElementById('modalGalleryCounter');
+                    if (counter) {
+                        const total = galleryTrack.querySelectorAll('img').length;
+                        counter.textContent = `${index + 1} / ${total}`;
+                    } else {
+                        galleryDots.querySelectorAll('.gallery-dot').forEach((dot, i) => {
+                            dot.classList.toggle('active', i === index);
+                        });
+                    }
                     scrollTick = false;
                 });
             }, { passive: true });

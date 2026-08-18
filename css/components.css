@@ -611,6 +611,22 @@
     border-radius: var(--border-radius-full);
 }
 
+/* Large galleries (>8 photos) swap the dot row for a plain counter —
+   two dozen 26px hit targets would overflow the modal width */
+.gallery-dots-counter {
+    gap: 0;
+}
+
+.gallery-dots-counter #modalGalleryCounter {
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--color-gray);
+    background: var(--color-gray-pale);
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--border-radius-full);
+}
+
 /* Guests / bedrooms / beds inside the sheet */
 .modal-specs {
     list-style: none;
