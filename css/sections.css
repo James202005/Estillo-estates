@@ -353,6 +353,15 @@
     margin-bottom: 0.5rem;
 }
 
+/* <strong>'s default bold (700) barely reads against this text's own 600 —
+   and a middot has almost no stroke to thicken anyway. Color + size carries
+   the emphasis instead of relying on a one-step font-weight jump. */
+.property-card-body .years strong {
+    font-weight: 700;
+    font-size: 1.3em;
+    color: var(--color-charcoal);
+}
+
 .property-card-body h3 {
     font-family: var(--font-serif);
     font-size: 1.75rem;
