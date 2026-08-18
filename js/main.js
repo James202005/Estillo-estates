@@ -480,7 +480,7 @@
             const rate = document.getElementById('modalPropRate');
             if (rate) {
                 rate.innerHTML = data.rate
-                    ? `<strong>${data.rate}</strong> <span>/ night · ${data.location}</span>`
+                    ? `<strong>${data.rate}</strong> <span>/ night</span>`
                     : `<span>${data.years}</span>`;
             }
 

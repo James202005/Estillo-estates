@@ -129,7 +129,7 @@
 
     <!-- Master CSS Design System Bundle. Bump ?v= here and in styles.css
          after editing CSS so browsers don't serve a stale copy. -->
-    <link rel="stylesheet" href="css/styles.css?v=11">
+    <link rel="stylesheet" href="css/styles.css?v=12">
 </head>
 <body>
 
@@ -579,15 +579,19 @@
     <!-- Property Quick-View Modal Overlay -->
     <div class="modal-overlay" id="propertyModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalPropTitle">
         <div class="modal-card">
-            <div class="modal-grabber" aria-hidden="true"></div>
-            <button class="modal-close" id="modalCloseBtn" type="button" aria-label="Close property details">&times;</button>
-            <div class="modal-body">
+            <!-- Stays pinned while modal-body scrolls, so the guest always
+                 knows which property they're looking at -->
+            <div class="modal-sticky-header">
+                <div class="modal-grabber" aria-hidden="true"></div>
+                <button class="modal-close" id="modalCloseBtn" type="button" aria-label="Close property details">&times;</button>
                 <div class="modal-meta">
                     <span class="modal-rating" id="modalPropCapacity">Capacity</span>
                     <span class="modal-location" id="modalPropLocation">Location</span>
                 </div>
                 <h2 class="modal-title" id="modalPropTitle">Property Title</h2>
                 <p class="modal-tagline" id="modalPropTagline">Property Tagline</p>
+            </div>
+            <div class="modal-body">
 
                 <!-- Swipeable photo gallery -->
                 <div class="modal-gallery">
@@ -705,6 +709,6 @@
     </div>
 
     <!-- Application JavaScript Entry Point -->
-    <script src="js/main.js?v=11"></script>
+    <script src="js/main.js?v=12"></script>
 </body>
 </html>

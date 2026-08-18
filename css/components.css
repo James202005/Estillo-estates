@@ -446,6 +446,18 @@
     transform: translateY(0) scale(1);
 }
 
+/* Pinned to the top of .modal-card (the actual scroll container) so the
+   property name stays visible no matter how far modal-body scrolls */
+.modal-sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: var(--color-cream-light);
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+    padding: 2.5rem 2.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
 /* Bottom-sheet drag handle — only shown in the mobile sheet layout */
 .modal-grabber {
     display: none;
@@ -484,7 +496,7 @@
 }
 
 .modal-body {
-    padding: 2.5rem;
+    padding: 1.4rem 2.5rem 2.5rem;
 }
 
 /* Modal content blocks */
