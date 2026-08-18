@@ -129,7 +129,7 @@
 
     <!-- Master CSS Design System Bundle. Bump ?v= here and in styles.css
          after editing CSS so browsers don't serve a stale copy. -->
-    <link rel="stylesheet" href="css/styles.css?v=17">
+    <link rel="stylesheet" href="css/styles.css?v=18">
 </head>
 <body>
 
@@ -613,7 +613,13 @@
                 <ul class="modal-specs" id="modalPropSpecs"></ul>
 
                 <div class="modal-address" id="modalAddressWrap" hidden>
-                    <span class="modal-address-text" id="modalPropAddress"></span>
+                    <span class="modal-address-text">
+                        <svg class="modal-address-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/>
+                            <circle cx="12" cy="9.5" r="2.3"/>
+                        </svg>
+                        <span id="modalPropAddress"></span>
+                    </span>
                     <div class="modal-address-actions">
                         <a class="modal-address-link" id="modalDirectionsLink" href="#" target="_blank" rel="noopener noreferrer">Directions <span aria-hidden="true">→</span></a>
                         <button type="button" class="modal-address-link modal-address-toggle" id="modalAddressToggle" aria-expanded="false" aria-controls="modalMapWrap">Show map</button>

@@ -708,11 +708,24 @@
 }
 
 .modal-address-text {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
     font-size: 0.86rem;
     color: var(--color-gray);
     line-height: 1.5;
     flex: 1;
     min-width: 60%;
+}
+
+.modal-address-pin {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    /* Nudges the pin to sit on the text's first line rather than centered
+       against the full (often multi-line) address block */
+    margin-top: 0.2em;
+    color: var(--color-gold);
 }
 
 /* Directions leaves the site (arrow, matches .property-more); the map
