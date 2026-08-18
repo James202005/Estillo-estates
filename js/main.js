@@ -565,6 +565,11 @@
             )).join('');
             track.scrollLeft = 0;
 
+            const prevBtn = document.getElementById('modalGalleryPrev');
+            const nextBtn = document.getElementById('modalGalleryNext');
+            if (prevBtn) prevBtn.disabled = true;
+            if (nextBtn) nextBtn.disabled = data.gallery.length <= 1;
+
             if (!dots) return;
             const count = data.gallery.length;
             dots.hidden = count <= 1;
@@ -586,6 +591,8 @@
         // Delegated once — the dots are rebuilt on every open
         const galleryTrack = document.getElementById('modalGallery');
         const galleryDots = document.getElementById('modalGalleryDots');
+        const galleryPrev = document.getElementById('modalGalleryPrev');
+        const galleryNext = document.getElementById('modalGalleryNext');
 
         if (galleryTrack && galleryDots) {
             /* Slide pitch is measured from the rendered children — mobile shows
@@ -598,30 +605,53 @@
                 return galleryTrack.clientWidth || 1;
             }
 
+            function goToSlide(index) {
+                // Instant rather than smooth: a second smooth scrollTo() call on
+                // the same element proved unreliable (verified: the animation
+                // would silently never complete on repeat calls), so explicit
+                // dot/arrow clicks snap directly. Touch swipe still gets natural
+                // momentum since that scrolls the track directly, bypassing this.
+                galleryTrack.scrollTo({
+                    left: index * slideStep(),
+                    behavior: 'auto'
+                });
+            }
+
             galleryDots.addEventListener('click', (e) => {
                 const dot = e.target.closest('.gallery-dot');
                 if (!dot) return;
-                galleryTrack.scrollTo({
-                    left: Number(dot.dataset.index) * slideStep(),
-                    behavior: prefersReducedMotion.matches ? 'auto' : 'smooth'
-                });
+                goToSlide(Number(dot.dataset.index));
             });
+
+            if (galleryPrev && galleryNext) {
+                galleryPrev.addEventListener('click', () => {
+                    const current = Math.round(galleryTrack.scrollLeft / slideStep());
+                    goToSlide(Math.max(0, current - 1));
+                });
+                galleryNext.addEventListener('click', () => {
+                    const total = galleryTrack.querySelectorAll('img').length;
+                    const current = Math.round(galleryTrack.scrollLeft / slideStep());
+                    goToSlide(Math.min(total - 1, current + 1));
+                });
+            }
 
             let scrollTick = false;
             galleryTrack.addEventListener('scroll', () => {
                 if (scrollTick) return;
                 scrollTick = true;
                 window.requestAnimationFrame(() => {
+                    const total = galleryTrack.querySelectorAll('img').length;
                     const index = Math.round(galleryTrack.scrollLeft / slideStep());
                     const counter = document.getElementById('modalGalleryCounter');
                     if (counter) {
-                        const total = galleryTrack.querySelectorAll('img').length;
                         counter.textContent = `${index + 1} / ${total}`;
                     } else {
                         galleryDots.querySelectorAll('.gallery-dot').forEach((dot, i) => {
                             dot.classList.toggle('active', i === index);
                         });
                     }
+                    if (galleryPrev) galleryPrev.disabled = index <= 0;
+                    if (galleryNext) galleryNext.disabled = index >= total - 1;
                     scrollTick = false;
                 });
             }, { passive: true });

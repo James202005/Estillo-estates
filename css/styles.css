@@ -3,9 +3,9 @@
 /* The ?v= token busts the browser cache. Imported files are cached
    separately from this one, so a plain reload can leave you looking at
    stale rules — bump this number whenever you edit any CSS below. */
-@import './variables.css?v=16';
-@import './base.css?v=16';
-@import './layout.css?v=16';
-@import './components.css?v=16';
-@import './sections.css?v=16';
-@import './responsive.css?v=16';
+@import './variables.css?v=17';
+@import './base.css?v=17';
+@import './layout.css?v=17';
+@import './components.css?v=17';
+@import './sections.css?v=17';
+@import './responsive.css?v=17';

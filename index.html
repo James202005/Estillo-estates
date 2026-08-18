@@ -129,7 +129,7 @@
 
     <!-- Master CSS Design System Bundle. Bump ?v= here and in styles.css
          after editing CSS so browsers don't serve a stale copy. -->
-    <link rel="stylesheet" href="css/styles.css?v=16">
+    <link rel="stylesheet" href="css/styles.css?v=17">
 </head>
 <body>
 
@@ -597,9 +597,16 @@
                     <span class="modal-location" id="modalPropLocation">Location</span>
                 </div>
 
-                <!-- Swipeable photo gallery -->
+                <!-- Swipeable on touch; arrow buttons cover mouse/trackpad users
+                     since there's no swipe gesture and the scrollbar is hidden -->
                 <div class="modal-gallery">
                     <div class="gallery-track" id="modalGallery" tabindex="0" role="group" aria-label="Property photos, swipe to browse"></div>
+                    <button type="button" class="gallery-nav gallery-nav-prev" id="modalGalleryPrev" aria-label="Previous photo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <button type="button" class="gallery-nav gallery-nav-next" id="modalGalleryNext" aria-label="Next photo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
                     <div class="gallery-dots" id="modalGalleryDots" aria-hidden="true"></div>
                 </div>
 
@@ -713,6 +720,6 @@
     </div>
 
     <!-- Application JavaScript Entry Point -->
-    <script src="js/main.js?v=14"></script>
+    <script src="js/main.js?v=16"></script>
 </body>
 </html>

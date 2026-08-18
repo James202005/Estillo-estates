@@ -545,7 +545,57 @@
 
 /* Swipeable photo gallery */
 .modal-gallery {
+    position: relative;
     margin-bottom: 1.25rem;
+}
+
+/* Touch swipes the track directly; mouse/trackpad users have no swipe
+   gesture and the scrollbar is deliberately hidden, so these are their
+   only way to move past the first photo */
+.gallery-nav {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(20, 18, 16, 0.55);
+    color: var(--color-cream);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: var(--transition-fast);
+}
+
+.gallery-nav svg {
+    width: 20px;
+    height: 20px;
+}
+
+.gallery-nav-prev {
+    left: 0.6rem;
+}
+
+.gallery-nav-next {
+    right: 0.6rem;
+}
+
+.gallery-nav:disabled {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .gallery-nav {
+        display: flex;
+    }
+
+    .gallery-nav:hover {
+        background: rgba(20, 18, 16, 0.8);
+    }
 }
 
 .gallery-track {
