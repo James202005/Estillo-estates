@@ -27,7 +27,7 @@
             capacity: '6 Guests',
             rate: '₱2,500',
             rating: '5.0 · Guest favorite · Top 5% of homes',
-            airbnb: 'https://www.airbnb.com/rooms/1591042140564793687',
+            airbnb: 'https://www.airbnb.com/rooms/1330278337522141292',
             booking: 'https://www.booking.com/Pulse-hT09gx',
             address: 'Semi-Industrial Cozy Home, Lumina Home Phase 3, Oton, Iloilo, 5020 Iloilo City, Philippines',
             // Exact pin coordinates (from the property's Google Maps share link) rather
@@ -72,7 +72,7 @@
             capacity: '9 Guests',
             rate: '₱4,699',
             rating: '5.0 · Guest favorite · Top 5% of homes',
-            airbnb: 'https://www.airbnb.com/rooms/1330278337522141292',
+            airbnb: 'https://www.airbnb.com/rooms/1591042140564793687',
             booking: 'https://www.booking.com/Pulse-aFRwUF',
             address: 'PGW2+G94 Estilo S|S (Blk8, Lot2, Glen D), Cottonwood, Oton, Iloilo, 5020 Iloilo City, Philippines',
             mapQuery: 'PGW2+G94 Oton, Iloilo, Philippines',
